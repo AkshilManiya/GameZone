@@ -1,0 +1,443 @@
+﻿
+@{
+    ViewData["Title"] = "ManageSlot";
+    Layout = "ManagerLayout";
+}
+
+@section styles {
+    <style>
+
+        .slotupdate{
+            
+        }
+
+        .m-s-div{
+        
+        }
+        .m-s-X-div {
+            background: #004d5c;
+            padding: 10px;
+            border: 1px solid #009db873;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        .m-s-left-div {
+        
+        }
+        
+        .m-s-right-div {
+        }
+
+        .m-s-left-div-up {
+        }
+
+        .m-s-left-div-down {
+        }
+
+        .m-s-right-div-up {
+        }
+
+        .m-s-right-div-down {
+        }
+
+        .m-s-X-select {
+            padding: 7px 22px 7px 22px;
+            border: 0;
+            border-radius: 5px;
+            margin: 3px;
+        }
+        .m-s-X-btn{
+            padding: 7px 22px 7px 22px;
+            border: 0;
+            border-radius: 5px;
+            margin: 3px;
+            background: #cbd5df;
+        }
+    </style>
+}
+
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Manage Slot schedule
+                    </div>
+                </div>
+            </div>
+            <div class="filtering-div">
+                <div class="row m-s-div">
+                    <div class="col-lg-6 m-s-left-div">
+                        <div class="m-s-X-div">
+                            <select  class="m-s-X-select" onchange="onchangegame()" id="selectGame">Games</select>
+                            <div>
+                                <button class="m-s-X-btn" onclick="" id="btn1">btn1</button>
+                                <button class="m-s-X-btn" onclick="" id="btn2">btn2</button>
+                                <button class="m-s-X-btn" onclick="" id="btn3">btn3</button>
+                                <button class="m-s-X-btn" onclick="" id="btn4">btn4</button>
+                                <button class="m-s-X-btn" onclick="" id="btn5">btn5</button>
+                                <button class="m-s-X-btn" onclick="" id="btn6">btn6</button>
+                                <button class="m-s-X-btn" onclick="" id="btn7">btn7</button>
+                            </div>
+                        </div>  
+                        <div class="m-s-X-div">
+                            <div class="slotupdate manageGameMain-table-div">
+                                <table class="Admin-table">
+                                    <thead>
+                                        <tr class="Admin-t-tr">
+                                            <th class="Admin-t-th">number</th>
+                                            <th class="Admin-t-th">Slot</th>
+                                            <th class="Admin-t-th">Day</th>
+                                            <th class="Admin-t-th">Starting time</th>
+                                            <th class="Admin-t-th">duration</th>
+                                            <th class="Admin-t-th">TimeFrame</th>
+                                            <th class="Admin-t-th">Rant</th>
+                                            <th class="Admin-t-th">Operation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="RowSlotData">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 m-s-right-div">
+                        <div class="m-s-X-div">
+                            <div class="slotupdate  manageGameMain-table-div">
+                                <table class="Admin-table">
+                                    <thead>
+                                        <tr class="Admin-t-tr">
+                                            <th class="Admin-t-th">Slot id</th>
+                                            <td class="Admin-t-td">
+                                                <label id="SlotId"></label>
+                                            </td>
+                                        </tr>
+                                        <tr class="Admin-t-tr">
+                                            <th class="Admin-t-th">Starting Time</th>
+                                            <td class="Admin-t-td" >
+                                                <input type="time" id="SlotTime" />
+                                            </td>
+                                        </tr>
+                                        <tr class="Admin-t-tr">
+                                            <th class="Admin-t-th">Duration</th>
+                                            <td class="Admin-t-td" >
+                                                <input type="number" id="SlotDuration" />
+                                            </td>
+                                        </tr>
+                                        <tr class="Admin-t-tr">
+                                            <th class="Admin-t-th">Rant</th>
+                                            <td class="Admin-t-td" >
+                                                <input type="number" id="SlotRant" />
+                                            </td>
+                                        </tr>
+
+                                        <tr class="Admin-t-tr">
+                                            <th class=""></th>
+                                            <td class="Admin-t-td" id="SlotRant">
+                                                <button class='manageGameMain-table-tr-deactive-btn' onclick="UpdateSlot()">Update</button>
+                                                <button class='manageGameMain-table-tr-active-btn' onclick="deleteslot()">Delete</button>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="m-s-X-div">
+                            <div class="slotupdate  manageGameMain-table-div">
+                                <table class="Admin-table">
+                                    <thead>
+                                        <tr class="Admin-t-tr">
+                                            <th class="Admin-t-th">Starting</th>
+                                            <td class="Admin-t-td">
+                                                <input type="time" id="NewSlotTime" />
+                                            </td>
+                                        </tr>
+                                        <tr class="Admin-t-tr">
+                                            <th class="Admin-t-th">Slot Duration</th>
+                                            <td class="Admin-t-td">
+                                                <input type="number" id="NewSlotDuration" />
+                                            </td>
+                                        </tr>
+                                        <tr class="Admin-t-tr">
+                                            <th class="Admin-t-th">Slot Rant</th>
+                                            <td class="Admin-t-td">
+                                                <input type="number" id="NewSlotRant" />
+                                            </td>
+                                        </tr>
+                                        <tr class="Admin-t-tr">
+                                            <th class=""></th>
+                                            <td class="Admin-t-td" id="SlotRant">
+                                                <button class='manageGameMain-table-tr-deactive-btn' onclick="AddSlot()">Add New Slot</button><br>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+<div class="slotupdate">
+    <select onchange="onchangegame()" id="selectGame">Games</select>
+    <div>
+        <button onclick="" id="btn1">btn1</button>
+        <button onclick="" id="btn2">btn2</button>
+        <button onclick="" id="btn3">btn3</button>
+        <button onclick="" id="btn4">btn4</button>
+        <button onclick="" id="btn5">btn5</button>
+        <button onclick="" id="btn6">btn6</button>
+        <button onclick="" id="btn7">btn7</button>
+    </div>
+</div>
+
+<div class="slotupdate">
+    <table>
+        <thead>
+            <tr>
+                <th>number</th>
+                <th>Slot</th>
+                <th>Day</th>
+                <th>Starting time</th>
+                <th>duration</th>
+                <th>TimeFrame</th>
+                <th>Rant</th>
+            </tr>
+        </thead>
+        <tbody id="RowSlotData">
+        </tbody>
+    </table>
+</div>
+
+<div class="slotupdate">
+    <div>
+        <label>Slot id : </label>
+        <label id="SlotId"></label>
+    </div>
+    
+    <div>
+        <label>Starting Time : </label>
+        <input type="time" id="SlotTime" />
+    </div>
+    
+    <div>
+        <label>Duration : </label>
+        <input type="number" id="SlotDuration" />
+    </div>
+    
+    <div>
+        <label>Rant : </label>
+        <input type="number" id="SlotRant" />
+    </div>
+
+    <button onclick="UpdateSlot()">Update</button><br>
+    <button onclick="deleteslot()">Delete</button><br>
+</div>
+
+
+ @* add new slot *@
+<div class="slotupdate">
+    <div>
+        <label>Starting Time : </label>
+        <input type="time" id="NewSlotTime" />
+    </div>
+    
+    <div>
+        <label>Duration : </label>
+        <input type="number" id="NewSlotDuration" />
+    </div>
+    
+    <div>
+        <label>Rant : </label>
+        <input type="number" id="NewSlotRant" />
+    </div>
+    <button onclick="AddSlot()">Add New Slot</button><br>
+</div>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    var ids = 0;
+    var Game;
+    var Day;
+
+    $(document).ready(function () {
+        var today = new Date();
+        for (var i = 7; i < 14; i++) { 
+            var button = document.getElementById('btn' + (i - 6));
+            var date = addDays(today, i);
+            button.setAttribute('onclick', 'onchangeday("' + date + '")');
+            button.textContent = date;
+        }
+        var todayDate = addDays(today, 7);
+        Day = todayDate;
+        fetch_Game();
+    });
+
+
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result.toISOString().slice(0, 10);
+    }
+
+
+    function onchangegame() { 
+        Game = $("#selectGame").val();
+        fetch_slot();
+    }
+
+    function onchangeday(date) { 
+        Day = date;
+        fetch_slot();
+    }
+
+    function fetch_Game() { 
+        $.ajax({
+            url: '/DropDown/Game',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                $("#selectGame").empty();
+                $("#selectGame").html(response);
+                $("#selectGame").val($("#selectGame option:first").val());
+                onchangegame();
+            }
+        });
+    }
+
+    function changeslotview(id){
+        $.ajax({
+            url: '/RowSlot/updateRowSlotView',
+            type: 'POST',
+            async: false,
+            data: {id:id},
+            success: function (response) {
+                $("#SlotId").text(response['Rowslot_id']);
+                $("#SlotTime").val(response['Starting_time']);
+                $("#SlotDuration").val(response['Duration']);
+                $("#SlotRant").val(response['Rant']);
+                ids = response['Rowslot_id'];
+            }
+        });
+    
+    }
+
+    function fetch_slot() { 
+        console.log(Game, Day);
+        $.ajax({
+            url: '/RowSlot/fetchRowSlot',
+            type: 'POST',
+            async: false,
+            data: { game:Game , day: Day},
+            success: function (response) {
+                $("#RowSlotData").html(response);
+                clear();
+            }
+        });
+    }
+
+    function AddSlot() {
+        var time = $("#NewSlotTime").val();
+        var duration = $("#NewSlotDuration").val();
+        var rant = $("#NewSlotRant").val();
+        var d = Day.toString();
+        console.log(time, duration, rant, Game,d);
+        $.ajax({
+            url: '/RowSlot/AddRowSlot',
+            type: 'POST',
+            data: { game: Game, day: d, time: time, duration: duration, rant: rant, timeframe:getTimeFrame(time)},
+            success: function (response) {
+                if (response == "success") {
+                    console.log(response);
+                    fetch_slot();
+                }
+                else if (response == "duration") {
+                    alert("plz enter valid duration");
+                }
+                else if (response == "slot") {
+                    alert("slot was conlise ");
+                }
+                else {
+                    console.log(response);
+                    fetch_slot();
+                }
+            }
+        });
+    }
+
+    function getTimeFrame(time) {
+        const [hours, minutes] = time.split(':').map(Number);
+        if (hours >= 0 && hours < 6) {
+            return 4; // Night
+        } else if (hours >= 6 && hours < 12) {
+            return 1; // Morning
+        } else if (hours >= 12 && hours < 18) {
+            return 2; // Afternoon
+        } else {
+            return 3; // Evening
+        }
+    }
+
+    function deleteslot() {
+        $.ajax({
+            url: '/RowSlot/DeleteRowSlot',
+            type: 'POST',
+            data: { id: ids },
+            success: function (response) {
+                if (response == "success") {
+                    fetch_slot();
+                }
+                else {
+                    alert("error deleting");
+                }
+            }
+        });
+    }
+
+    function UpdateSlot() {
+        var time = $("#SlotTime").val();
+        var duration = $("#SlotDuration").val();
+        var rant = $("#SlotRant").val();
+        var d = Day.toString();
+        $.ajax({
+            url: '/RowSlot/UpdateRowSlot',
+            type: 'POST',
+            data: { id: ids, time: time, duration: duration, rant: rant, timeframe: getTimeFrame(time), game: Game, day: d },
+            success: function (response) {
+                if (response == "success") {
+                    console.log(response);
+                    fetch_slot();
+                }
+                else if (response == "duration") {
+                    alert("plz enter valid duration");
+                }
+                else if (response == "slot") {
+                    alert("slot was conlise ");
+                }
+                else {
+                    console.log(response);
+                    fetch_slot();
+                }
+            }
+        });
+    }
+
+    function clear() {
+        $("#SlotId").text("");
+        $("#SlotTime").val("");
+        $("#SlotDuration").val("");
+        $("#SlotRant").val("");
+        $("#NewSlotTime").val("");
+        $("#NewSlotDuration").val("");
+        $("#NewSlotRant").val("");
+    }
+
+
+
+</script>

@@ -1,0 +1,652 @@
+﻿
+@{
+    ViewData["Title"] = "ManageClub";
+    Layout = "AdminLayout";
+}
+
+@section styles {
+    <style>
+        /*table ,th, td, tr{
+            border: 2px solid blue;
+            padding: 7px;
+            margin: 2px;
+        }*/
+        .g-g-f {
+            border-radius: 10px;
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            max-height: 300px;
+            background: black;
+        }
+
+        .section-manageGameMain2{
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+    </style>
+}
+<section class="section-manageGameMain" id="hideUper">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Manage Clubs
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="manageGameMain-head-right">
+                        <button class="manageGameMain-club-btn" onclick="window.location.href='/Admin/AddManagerView'">
+                            Add club manager
+                        </button>
+                        <button class="manageGameMain-addGame-btn" onclick="window.location.href='/Admin/AddClub'">
+                            Add Club
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="filtering-div">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="filtering-search-div">
+                            <div class="search-icon">
+                                <i class="ri-search-line"></i>
+                            </div>
+                            <input id="search_Text" type="text" class="filtering-search" onkeypress="fetch_All_club()" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="filtering-col-div">
+                            <div class="filtering-title">
+                                State
+                            </div>
+                            <div class="filtering-select-div">
+                                <select id="State" onchange="fetch_City(2)" class="filtering-select">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="filtering-col-div">
+                            <div class="filtering-title">
+                                City
+                            </div>
+                            <div class="filtering-select-div">
+                                <select class="filtering-select" id="City" onchange="fetch_Area(2)">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="filtering-col-div">
+                            <div class="filtering-title">
+                                Area
+                            </div>
+                            <div class="filtering-select-div">
+                                <select class="filtering-select" id="Area" onchange="fetch_Club()">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button onclick="fetch_All_club_call()">Fetch All Club </button>
+                    </div>
+                </div>
+            </div>
+            <div class="manageGameMain-table-div">
+                <table class="Admin-table">
+                    <thead>
+                        <tr class="Admin-t-tr">
+                            <th class="Admin-t-th">No.</th>
+                            <th class="Admin-t-th">name</th>
+                            <th class="Admin-t-th">manager</th>
+                            <th class="Admin-t-th">State</th>
+                            <th class="Admin-t-th">City</th>
+                            <th class="Admin-t-th">Area</th>
+                            <th class="Admin-t-th">Address</th>
+                            <th class="Admin-t-th">Joining date</th>
+                            <th class="Admin-t-th">Rating</th>
+                            <th class="Admin-t-th">Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ClubData">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+                    <!--
+
+<div>
+    <div>
+        <select id="State" onchange="fetch_City(2)"></select>
+    </div>
+    <div>
+        <select id="City" onchange="fetch_Area(2)"></select>
+    </div>
+    <div>
+        <select id="Area" onchange="fetch_Club()"></select>
+    </div>
+</div>
+
+<div>
+    <table>
+        <thead>
+            <tr >
+                <th>number</th>
+                <th>name</th>
+                <th>manager</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Area</th>
+                <th>Address</th>
+                <th>Joining date</th>
+                <th>Rating</th>
+                <th>Update</th>
+                <th>Disable</th>
+            </tr>
+        </thead>
+        <tbody id="ClubData">
+
+        </tbody>
+    </table>
+</div>
+                    -->
+
+
+<section class="section-manageGameMain2" id="hideDown">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Update Club
+                    </div>
+                </div>
+            </div>
+            <div class="row manageGameMain-table-div">
+                <div class="col-lg-6 manageGameMain-div-leftC">
+                    <div class="g-g-f" style="">
+                        <img class="m-d-lc-img" src="" alt="ProfileImage" id="image"></img>
+                    </div>
+                    <br>
+                    <button class="m-d-lc-img-btn" onclick="ProfileUpdate()">Change Image</button>
+                </div>
+                <div class="col-lg-6 manageGameMain-div-rightC">
+                    <div class="form-area">
+                        <div class="logInHeading">Details</div>
+                        <div class="f-d-error" id="error"></div>
+
+                        <div class="form-area-field">
+                            <div class="f-d-text-area">
+                                <div class="f-d-text">Club name</div>
+                                <div class="f-d-error" id="nameerror"></div>
+                            </div>
+                            <input class="form-area-input" type="text" id="name" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area">
+                                <div class="f-d-text">state</div>
+                                <div class="f-d-error" id="stateerror"></div>
+                            </div>
+                            <select class="form-area-input" type="text" id="NewState" ></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" >
+                                <div class="f-d-text">City</div>
+                                <div class="f-d-error" id="cityerror"></div>
+                            </div>
+                            <select class="form-area-input" id="NewCity"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" >
+                                <div class="f-d-text">Area</div>
+                                <div class="f-d-error" id="areaerror"></div>
+                            </div>
+                            <select class="form-area-input" id="NewArea"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area">
+                                <div class="f-d-text">Assign Manager</div>
+                                <div class="f-d-error" id="managererror"></div>
+                            </div>
+                            <select class="form-area-input" id="Manager"></select>
+                        </div>
+
+                        <div class="form-area-field">
+                            <div class="f-d-text-area">
+                                <div class="f-d-text">Address</div>
+                                <div class="f-d-error" id="addresserror"></div>
+                            </div>
+                            <input class="form-area-input" type="text" id="addr" />
+                        </div>
+                        <button class="f-d-submitBtn" onclick="UpdateClub()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--
+
+<div>
+
+    <img src="" alt="ProfileImage" id="image" style="width: 200px; height: 200px;"></img>
+    <br>
+    <button onclick="ProfileUpdate()">Change Image</button>
+
+</div>
+
+
+<div>
+    <label>enter name : </label>
+    <label id="nameerror"></label>
+    <input type="text" id="name" />
+    <br>
+
+    <label>selec state : </label>
+    <label id="stateerror"></label>
+    <select id="NewState" onchange="fetch_City(1)"></select>
+    <br>
+
+    <label>select city : </label>
+    <label id="cityerror"></label>
+    <select id="NewCity" onchange="fetch_Area(1)"></select>
+    <br>
+
+    <label>select area : </label>
+    <label id="areaerror"></label>
+    <select id="NewArea"></select>
+    <br>
+
+    <label>select manager : </label>
+    <label id="managererror"></label>
+    <select id="Manager"></select>
+    <br>
+
+    <label>enter Address : </label>
+    <label id="addresserror"></label>
+    <input type="text" id="addr" />
+    <br>
+
+    <button onclick="UpdateClub()">Update Club</button>
+</div>
+-->
+
+<script>
+    function hideUper() { 
+        $("#hideUper").hide();
+        $("#hideDown").show();
+    }
+    function hideDown() { 
+        $("#hideUper").show();
+        $("#hideDown").hide();
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    var ids = 0;
+
+    $(document).ready(function () {
+        fetch_State();
+        fetch_All_club();
+        hideDown();
+    });
+
+    function fetch_All_club_call() {
+        $("#search_Text").val("");
+        fetch_All_club();
+    }
+
+    function fetch_All_club() { 
+        var search = $("#search_Text").val();
+        $.ajax({
+            url: '/Club/fetchClub',
+            type: 'POST',
+            data: { area: 0, text:search},
+            success: function (response) {
+                $("#ClubData").empty();
+                $("#ClubData").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function fetch_State() { 
+        $.ajax({
+            url: '/DropDown/State',
+            type: 'POST',
+            success: function (response) {
+                $("#State").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function fetch_City(mode) {
+        if (mode == 1) { 
+            var id = $("#NewState").val();
+        }
+        else{
+            var id = $("#State").val();
+         }
+        $.ajax({
+            url: '/DropDown/City',
+            type: 'POST',
+            data: { state: id },
+            success: function (response) {
+                    if (mode == 1) {
+                        $("#NewCity").html(response);
+                    }
+                    else {
+                        $("#City").html(response);
+                    }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function fetch_Area(mode) {
+        if (mode == 1) {
+            var id = $("#NewCity").val();
+        }
+        else {
+            var id = $("#City").val();
+        }
+        $.ajax({
+            url: '/DropDown/Area',
+            type: 'POST',
+            data: { city: id },
+            success: function (response) {
+                if (mode == 1) {
+                    $("#NewArea").html(response);
+                }
+                else { 
+                    $("#Area").html(response);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function fetch_Club() {
+        var id = $("#Area").val();
+        var search = $("#search_Text").val();
+        $.ajax({
+            url: '/Club/fetchClub',
+            type: 'POST',
+            data: { area: id, text:search},
+            success: function (response) {
+                $("#ClubData").empty();
+                $("#ClubData").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function disableclub(id) {
+        $.ajax({
+            url: '/Club/DisableClub',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+                if (response == "success") {
+                    fetch_Club();
+                }
+                else {
+                    alert("error deleting");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function enableclub(id) {
+        $.ajax({
+            url: '/Club/EnableClub',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+                if (response == "success") {
+                    fetch_Club();
+                }
+                else {
+                    alert("error deleting");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+
+
+
+
+    function state() { 
+        $.ajax({
+            url: '/DropDown/State',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                $("#NewState").empty();
+                $("#NewState").html(response);
+            }
+        });
+    }
+
+    function city(id) {
+        $.ajax({
+            url: '/DropDown/City',
+            type: 'POST',
+            async: false,
+            data: { state: id },
+            success: function (response) {
+                $("#NewCity").empty();
+                $("#NewCity").html(response);
+            }
+        });
+    }
+
+    function area(id) {
+        $.ajax({
+            url: '/DropDown/Area',
+            type: 'POST',
+                async: false,
+            data: { city: id },
+            success: function (response) {
+                $("#NewArea").empty();
+                $("#NewArea").html(response);
+            }
+        });
+    }
+
+    function manager(id) {
+        $.ajax({
+            url: '/DropDown/Manager',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                $("#Manager").empty();
+                $("#Manager").html(response);
+            }
+        });
+    }
+
+    function updateclubview(id) { 
+        $.ajax({
+            url: '/Club/UpdateClubView',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+
+                console.log(response);
+                document.getElementById('image').src = `http://localhost:5003/Assets/Club/${response['image']}`;
+                $('#name').val(response['name']);
+                $('#addr').val(response['addr']);
+
+                state();
+                city(response['state']);
+                area(response['city']);
+                manager();
+
+                $("#NewState").val(response['state']);
+                $("#NewCity").val(response['city']);
+                $("#NewArea").val(response['area']);
+                $("#NewManager").val(response['manager']);
+
+                ids = response['club_id'];
+                hideUper();
+
+
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function selectOptionById(selectElementId, valueToSelect) {
+        $('#' + selectElementId).each(function () {
+            if ($(this).val() === valueToSelect) {
+                $(this).prop('selected', true);
+                return false;
+            }
+        });
+    }
+
+    function save_image(filename) {
+        console.log(ids, filename);
+        $.ajax({
+            url: '/Club/UpdateClubImage',
+            type: 'POST',
+            data: { id:ids, img: filename },
+            success: function (response) {
+                console.log(response);
+                if (response !== "success") {
+                    alert("error updating image : ", response);
+                } else {
+                    $("#image").attr("src", "/Assets/Club/"+filename);
+
+                }
+            }
+        });
+    }
+
+    function uploadImage(selectedFile) {
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+
+        $.ajax({
+            url: '/Upload/Club',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            async: false,
+            success: function (response) {
+                if (response.success) {
+                    $("#uploadStatus").text("Upload successful!");
+                } else {
+                    $("#uploadStatus").text("Upload failed: " + response.message);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $("#uploadStatus").text("Upload error: " + errorThrown);
+            }
+        });
+    }
+
+    function ProfileUpdate() {
+        const fileInput = document.createElement('input');
+        var fileName;
+        fileInput.type = 'file';
+        fileInput.accept = '.jpg, .jpeg, .png, .webp';
+        fileInput.style.display = 'none';
+        fileInput.click();
+        fileInput.addEventListener('change', function () {
+            const selectedFile = fileInput.files[0];
+            if (selectedFile) {
+                fileName = selectedFile.name;
+                if (isAllowedFileType(fileName)) {
+                    uploadImage(selectedFile);
+                    save_image(fileName);
+                } else {
+                    alert('Invalid file type. Please select a jpg, jpeg, png, or webp image.');
+                }
+            }
+        });
+    }
+
+    function isAllowedFileType(fileName) {
+        const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+        const extension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+        return allowedExtensions.includes(extension);
+    }
+
+    
+
+    function UpdateClub() {
+        var name = $("#name").val();
+        var addr = $("#addr").val();
+        var area = $("#NewArea").val();
+        var manager = $("#Manager").val();
+
+        if (name == null || name == "" || name.length <= 1) {
+            $("#nameerror").text("Please fill this detail");
+            return;
+        } else if (name.match(/[`!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+            $("#nameerror").text("Name dose not contain any special characters");
+            return;
+        } else if (addr == null || addr == "") {
+            $("#addresserror").text("Please fill this address");
+            return;
+        } else if (addr.length <= 5) {
+            $("#addresserror").text("Please give valid club address");
+            return;
+        } else if ($("#NewState").val() == null) {
+            $("#stateerror").text("Please select an state");
+            return;
+        } else if ($("#NewCity").val() == null) {
+            $("#cityerror").text("Please select an city");
+            return;
+        } else if ($("#NewArea").val() == null) {
+            $("#areaerror").text("Please select an area");
+            return;
+        } else if ($("#Manager").val() == null) {
+            $("#managererror").text("Please select an manager");
+            return;
+        }
+
+        $.ajax({
+            url: '/Club/UpdateClub',
+            method: 'POST',
+            data: { id:ids, name: name, area: area, manager: manager, addr: addr},
+            success: function (response) {
+                console.log(response);
+                fetch_Club();
+                hideDown();
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+    
+</script>

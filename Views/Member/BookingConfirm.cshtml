@@ -1,0 +1,542 @@
+﻿@using System.Globalization
+
+@{
+    ViewData["Title"] = "BookingConfirm";
+    Layout = "MemberLayout";
+}
+
+
+@section styles {
+    <style>
+        .section-padding {
+            padding-top: 50px;
+            padding-bottom: 50px
+        }
+
+        .section-bg {
+            /* background-color: rgb(0, 0, 0) */
+        }
+
+        .mybooking-Div {
+            background: #8000b357;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%);
+        }
+
+        .mybooking-title {
+            color: wheat;
+            font-size: 57px;
+            font-weight: 700;
+            background: linear-gradient(to right, red, yellow 49%);
+            -webkit-text-fill-color: #ff31f969;
+            -webkit-background-clip: text;
+        }
+
+        .mybooking-set-div {
+            background: #6a23af;
+            border-radius: 10px;
+            padding: 23px;
+            box-shadow: inset 0px 0px 20px 0px rgb(0 0 0 / 64%);
+        }
+
+        .mybooking-set-items-btn {
+            display: flex;
+            background: #d520ff9c;
+            /* margin: 0px; */
+            padding: 9px;
+            border-radius: 10px;
+            color: white;
+            border: 0px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+            .mybooking-set-items-btn:hover {
+                background: #cf00ff;
+            }
+
+        .mybooking-item-num {
+            font-size: 40px;
+            width: 5%;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .mybooking-item-division {
+            width: 2px;
+            color: white;
+            background: white;
+            margin: 4px;
+            height: 51px;
+        }
+
+        .mybooking-item-info {
+            width: 60%;
+            text-align: left;
+            padding-left: 14px;
+        }
+
+        .mybooking-item-info-up {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .mybooking-item-info-up-l {
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .mybooking-item-info-up-r {
+            color: #fbb3ff;
+            padding-left: 9px;
+            font-size: 23px;
+        }
+
+        .mybooking-item-info-down {
+            color: #fbb3ff;
+        }
+
+
+        .mybooking-item-rating-btn {
+            width: 19%;
+            text-align: center;
+            font-size: 39px;
+            color: #ffe200;
+        }
+
+        .mybooking-item-status {
+            width: 12%;
+            font-size: 23px;
+            display: flex;
+            text-align: left;
+            padding: 12px;
+        }
+
+        .status-icon {
+            padding-left: 4px;
+            font-weight: 800;
+            font-size: 25px;
+        }
+
+        .slotConfirm-main {
+            display: none;
+            position: fixed;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .slotConfirm-div {
+            border-radius: 10px;
+            background: linear-gradient(to bottom right, #00bfad87, #009fb97a);
+            box-shadow: 0 0 20px 1px rgb(0 0 0);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: 0 10;
+        }
+
+        .slotConfirm-main-open {
+            display: block;
+        }
+
+        .slotConfirm-title {
+            text-align: left;
+            font-size: 246%;
+            font-weight: bold;
+            /* padding: 28px; */
+            background: linear-gradient(to right, #00ff95, cyan);
+            -webkit-text-fill-color: #91d2ff69;
+            -webkit-background-clip: text;
+        }
+
+        .slotConfirm-left {
+            text-align: left;
+            background: #00daff4f;
+            border-radius: 10px;
+            padding: 8px 24px 24px 24px;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slotConfirm-gamename {
+            font-size: 45px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .slotConfirm-club {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .slotConfirm-location {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .slotConfirm-time {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-persons {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-amount {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-cancel-div {
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            /* top: 0; */
+            padding: 16px;
+        }
+
+        .slotConfirm-cancel-btn {
+            padding: 5px 18px;
+            color: #ffffffa1;
+            background: #ab2f2f;
+            font-size: 16px;
+            border: 1px solid;
+            border-radius: 8px;
+            height: 33px;
+            margin-left: 30px;
+        }
+
+            .slotConfirm-cancel-btn:hover {
+                color: white;
+                background: #000000;
+            }
+
+        .slotConfirm-Download-btn {
+            padding: 5px 18px;
+            color: #ffffffa1;
+            background: #0e7d1b;
+            font-size: 16px;
+            border: 1px solid;
+            border-radius: 8px;
+            height: 33px;
+            margin-left: 30px;
+        }
+
+            .slotConfirm-Download-btn:hover {
+                color: white;
+                background: #000000;
+            }
+
+        .slotConfirm-rating-btn {
+            padding: 5px 86px;
+            color: #ffffffa1;
+            background: #ab2f2ff0;
+            font-size: 22px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+            .slotConfirm-rating-btn:hover {
+                color: white;
+                background: #af0000;
+            }
+
+        .slotConfirm-right {
+            background: #00daff4f;
+            border-radius: 10px;
+            padding: 8px 24px 24px 24px;
+            text-align: center;
+        }
+
+        .slotConfirm-right-slot-id {
+        }
+
+        .slotConfirm-right-qr-code {
+            width: 100%;
+            height: 346px;
+            background: white;
+        }
+
+        .slotConfirm-right-qr-code-img {
+            width: 100%;
+            height: auto;
+            float: left;
+            max-width: 100%;
+        }
+
+        .info-icons {
+            padding-right: 10px;
+        }
+
+        .blur2 {
+            filter: blur(4px);
+        }
+
+        .rating-main {
+            display: none;
+            position: fixed;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .rating-div {
+            border-radius: 10px;
+            /* background: linear-gradient(to bottom right, #ab00bf, #8300b9); */
+            box-shadow: 0 0 20px 1px rgb(0 0 0 / 33%);
+            color: white;
+            /* padding: 20px; */
+            text-align: center;
+            margin: 0 10;
+        }
+
+        .rating-div-give-btnSet {
+        }
+
+        .rating-div-btnSet-btn {
+            background: transparent;
+            border: 0;
+            color: white;
+            font-size: 100px;
+        }
+
+        .rating-div-des {
+        }
+
+        .rating-des-text {
+            color: white;
+        }
+
+        .rating-Open {
+            display: block;
+        }
+
+        .r-hide {
+            display: none;
+        }
+
+        .r-show {
+            display: block;
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/NewCSS/slotSchedule.css" />
+}
+
+<div class="slotConfirm-div" id="">
+    <div class="row">
+        <div class="slotConfirm-title">
+            Slot confirmation
+        </div>
+        <div class="col-lg-8 col-12">
+            <div class="slotConfirm-left">
+                <div class="slotConfirm-gamename">
+                    @ViewBag.Game_name
+                    <button id="CalBtn" onclick="cancelBooking()" class="slotConfirm-cancel-btn">Cancel </button>
+                    <button onclick="downloadQRCode()" class="slotConfirm-Download-btn">Download</button>
+                </div>
+                <div class="slotConfirm-club"><i class="ri-building-4-fill info-icons"></i>Club : @ViewBag.Club_name </div>
+                <div class="slotConfirm-location"><i class="ri-map-pin-2-fill info-icons"></i>Location : @ViewBag.Address</div>
+                <div class="slotConfirm-location"><i class="ri-map-pin-2-fill info-icons"></i>Manager : @ViewBag.Manager_name | @ViewBag.Contact</div>
+                <div class="slotConfirm-time"><i class="ri-calendar-2-fill info-icons"></i>Date & Time : @ViewBag.Slot_date |  @ViewBag.Slot_time</div>
+                <div class="slotConfirm-time"><i class="ri-calendar-2-fill info-icons"></i>Duration : @ViewBag.Duration</div>
+                <div class="slotConfirm-persons"><i class="ri-team-fill info-icons"></i>Players : @ViewBag.Players</div>
+                <div class="slotConfirm-amount"><i class="ri-coin-fill info-icons"></i>Payable Amount : @ViewBag.amount ₹ ( Offer : @ViewBag.Offer % | Tax : @ViewBag.Tax ) </div>
+
+                <div class="rating-div" id="Rating">
+                    <div class="rating-div-give-btnSet" id="rateBtn">
+                        <button class="rating-div-btnSet-btn" onclick="rateBtn(1)" id="rate1">☆</button>
+                        <button class="rating-div-btnSet-btn" onclick="rateBtn(2)" id="rate2">☆</button>
+                        <button class="rating-div-btnSet-btn" onclick="rateBtn(3)" id="rate3">☆</button>
+                        <button class="rating-div-btnSet-btn" onclick="rateBtn(4)" id="rate4">☆</button>
+                        <button class="rating-div-btnSet-btn" onclick="rateBtn(5)" id="rate5">☆</button>
+                    </div>
+                    <div class="rating-div-des">
+                        <div class="rating-des-text" id="description">
+                            Give ratings about this game
+                        </div>
+                    </div>
+                </div>
+                <!--
+                    <div class="slotConfirm-cancel-div">
+                        <button class="slotConfirm-cancel-btn">Cancel the slot</button>
+                    </div>
+                -->
+            </div>
+        </div>
+        <div class="col-lg-4 col-12">
+            <div class="slotConfirm-right">
+                <div class="slotConfirm-right-slot-id">
+                    Slot ID : @ViewBag.slotid
+                </div>
+                <div class="slotConfirm-right-qr-code">
+                    <img id="Qrcode" class="slotConfirm-right-qr-code-img" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        fetch_Qrcode();
+        console.log("asdflg");
+        if ((@ViewBag.DateDiff == 2) &&  (@ViewBag.Check_in == 0)) {
+            $("#CalBtn").show();
+        }
+        else { 
+            $("#CalBtn").hide();
+        }
+        if (@ViewBag.Check_in == 1) {
+            $("#Rating").show();
+        }
+        else { 
+            $("#Rating").hide();
+        }
+
+        rateBtn(@ViewBag.BookingRating);
+    });
+
+    function rateBtn(rate) {
+        if (rate == 1) {
+            document.getElementById("rate1").innerHTML = "★";
+            document.getElementById("rate2").innerHTML = "☆";
+            document.getElementById("rate3").innerHTML = "☆";
+            document.getElementById("rate4").innerHTML = "☆";
+            document.getElementById("rate5").innerHTML = "☆";
+        } else if (rate == 2) {
+            document.getElementById("rate1").innerHTML = "★";
+            document.getElementById("rate2").innerHTML = "★";
+            document.getElementById("rate3").innerHTML = "☆";
+            document.getElementById("rate4").innerHTML = "☆";
+            document.getElementById("rate5").innerHTML = "☆";
+
+        } else if (rate == 3) {
+            document.getElementById("rate1").innerHTML = "★";
+            document.getElementById("rate2").innerHTML = "★";
+            document.getElementById("rate3").innerHTML = "★";
+            document.getElementById("rate4").innerHTML = "☆";
+            document.getElementById("rate5").innerHTML = "☆";
+
+        } else if (rate == 4) {
+            document.getElementById("rate1").innerHTML = "★";
+            document.getElementById("rate2").innerHTML = "★";
+            document.getElementById("rate3").innerHTML = "★";
+            document.getElementById("rate4").innerHTML = "★";
+            document.getElementById("rate5").innerHTML = "☆";
+
+        } else if (rate == 5) {
+            document.getElementById("rate1").innerHTML = "★";
+            document.getElementById("rate2").innerHTML = "★";
+            document.getElementById("rate3").innerHTML = "★";
+            document.getElementById("rate4").innerHTML = "★";
+            document.getElementById("rate5").innerHTML = "★";
+        }
+        store_rating(rate);
+    }
+
+    function store_rating(rating) {
+        $.ajax({
+            url: "/Booking/storeRating",
+            method: "POST",
+            data: { rating: rating, id: @ViewBag.Booking_id},
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function DateDiff(dateString) {
+        const today = new Date().toISOString().slice(0, 10);
+        const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+        const dayAfterTomorrow = new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+        if (dateString == tomorrow) {
+            return false;
+        }
+        else if (dateString == dayAfterTomorrow) {
+            return false;
+        }
+        else if (today == dateString) { 
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    
+
+
+    function cancelBooking() {
+        $.ajax({
+            url: '/Booking/cancelBooking',
+            type: 'POST',
+            data: {id: @ViewBag.Booking_id},
+            success: function (response) {
+                console.log(response);
+                if (response == "success") { 
+                    window.location.href = '/Member/MyBooingsView';
+                }
+            }
+        });
+    }
+
+    function DateDiff(dateString) {
+        var givenDate = new Date(dateString);
+        var today = new Date();
+        var difference = today.getTime() - givenDate.getTime();
+        var differenceInDays = difference / (1000 * 3600 * 24);
+        if (differenceInDays > 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function fetch_Qrcode() {
+        $.ajax({
+            url: "https://akyworld.pythonanywhere.com/qrcode?data=BookingId,"+@ViewBag.Id,
+            type: 'GET',
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (blob) {
+                const imageUrl = URL.createObjectURL(blob);
+                $('#Qrcode').attr('src', imageUrl);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching QR code:', error);
+            }
+        });
+    }
+
+    function downloadQRCode() {
+        const container = document.getElementById("Qrcode");
+        const link = document.createElement('a');
+        link.href = container.src;
+        link.download = 'qrcode.png';
+        link.click();
+    }
+
+</script>
+
+
+

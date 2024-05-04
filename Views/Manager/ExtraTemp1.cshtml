@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Manage Club";
+    /*
+    Layout = "~/Pages/Shared/_Layout_Login.cshtml";
+     */
+    Layout = "~/Pages/Shared/_Layout_Admin_Home.cshtml";
+}
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Manage Clubs
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="manageGameMain-head-right">
+                        <button class="manageGameMain-club-btn" onclick="openClubManagerRegiForm()">
+                            Add club manager
+                        </button>
+                        <button class="manageGameMain-addGame-btn" onclick="openAddClubForm()">
+                            Add Club
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="filtering-div">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="filtering-search-div">
+                            <div class="search-icon">
+                                <i class="ri-search-line"></i>
+                            </div>
+                            <input type="text" class="filtering-search" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="filtering-col-div">
+                            <div class="filtering-title">
+                                State
+                            </div>
+                            <div class="filtering-select-div">
+                                <select class="filtering-select">
+                                    <option class="filtering-option">All</option>
+                                    <option class="filtering-option">State 1</option>
+                                    <option class="filtering-option">State 2</option>
+                                    <option class="filtering-option">State 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="filtering-col-div">
+                            <div class="filtering-title">
+                                City
+                            </div>
+                            <div class="filtering-select-div">
+                                <select class="filtering-select">
+                                    <option class="filtering-option">All</option>
+                                    <option class="filtering-option">City 1</option>
+                                    <option class="filtering-option">City 2</option>
+                                    <option class="filtering-option">City 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="filtering-col-div">
+                            <div class="filtering-title">
+                                Area
+                            </div>
+                            <div class="filtering-select-div">
+                                <select class="filtering-select">
+                                    <option class="filtering-option">All</option>
+                                    <option class="filtering-option">Area 1</option>
+                                    <option class="filtering-option">Area 2</option>
+                                    <option class="filtering-option">Area 3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="manageGameMain-table-div">
+                <table class="Admin-table">
+                    <tr class="Admin-t-tr">
+                        <th class="Admin-t-th">number</th>
+                        <th class="Admin-t-th">name</th>
+                        <th class="Admin-t-th">offer</th>
+                        <th class="Admin-t-th">members</th>
+                        <th class="Admin-t-th">rating</th>
+                        <th class="Admin-t-th">caption</th>
+                        <th class="Admin-t-th">charge</th>
+                        <th class="Admin-t-th">Update</th>
+                        <th class="Admin-t-th">Disable</th>
+
+                        <th class="Admin-t-th">ID</th>
+                        <th class="Admin-t-th">Club name</th>
+                        <th class="Admin-t-th">Location</th>
+                        <th class="Admin-t-th">Joining Date</th>
+                        <th class="Admin-t-th">Manager</th>
+                        <th class="Admin-t-th">Games</th>
+                        <th class="Admin-t-th">Operation</th>
+                    </tr>
+                    <tr class="Admin-t-tr">
+                        <td class='Admin-t-td'>1</td>
+                        <td class='Admin-t-td'>Alpha GX</td>
+                        <td class='Admin-t-td'>Gujarat, Surat</td>
+                        <td class='Admin-t-td'>10/3/2024</td>
+                        <td class='Admin-t-td'>Darvin</td>
+                        <td class='Admin-t-td'>3</td>
+                        <td class='Admin-t-td'>
+                            <button class="manageGameMain-table-tr-update-btn" onclick="openClubUpgradeForm()">Update</button>
+                            <button class="manageGameMain-table-tr-deactive-btn" id="deactiveBtn1" onclick="gameDeactiveBtn('1')">Deactive</button>
+                            <button class="manageGameMain-table-tr-active-btn hideeX" id="activeBtn1" onclick="gameActiveBtn('1')">active</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

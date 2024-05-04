@@ -1,0 +1,460 @@
+﻿
+@{
+    ViewData["Title"] = "MyWallet";
+    Layout = "MemberLayout";
+}
+
+@section styles {
+    <style>
+
+        .askjf{
+            color:white;
+        }
+        .section-padding {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .section-bg {
+            /* background-color: rgb(0, 0, 0) */
+        }
+
+        .wallet-Div {
+            background: #0080b357;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%);
+            backdrop-filter: blur(23px);
+        }
+
+        .wallet-Div-up {
+            background: #000000;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .wallet-Div-up-balance {
+            color: wheat;
+            font-size: 57px;
+            font-weight: 700;
+            /* background: linear-gradient(to right, #00ff72, #00ff16 49%); */
+            -webkit-text-fill-color: #008c38;
+            -webkit-background-clip: text;
+            text-align: center;
+        }
+
+        .wallet-Div-down {
+            background: #000000;
+            border-radius: 10px;
+            /* padding: 25px; */
+            padding: 0 20px 20px 20px;
+            box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%);
+        }
+
+        .wallet-Div-down-title {
+            color: wheat;
+            font-size: 35px;
+            font-weight: 700;
+            /* background: linear-gradient(to right, red, yellow 49%); */
+            -webkit-text-fill-color: #ffffffad;
+            -webkit-background-clip: text;
+            text-align: center;
+        }
+
+        .wallet-Div-down-data-tr-division {
+            width: 5%;
+        }
+
+        .wallet-Div-down-data-set {
+            /* background: #6a23af; */
+            /* box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%); */
+            padding: 7px 30px 7px 30px;
+            padding-top: 45px;
+            color: white;
+        }
+
+
+        .wallet-Div-down-data-sep {
+            background: #ffffff2e;
+            height: 2px;
+            margin: 3px 0;
+        }
+
+        .wallet-Div-down-data-pagebtns {
+            padding: 21px 30px 0px 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .wallet-Div-down-data-pagebtns-btn {
+            padding: 7px 30px 7px 30px;
+            /* text-align: center; */
+            color: #ffffffcf;
+            background: #3d0a5d82;
+            border-radius: 10px;
+            margin: 0 15px;
+            border: solid 1px transparent;
+            /* position: absolute; */
+            /* bottom: 0; */
+            /* right: 0; */
+            /* left: 0; */
+            /* top: 0; */
+        }
+
+            .wallet-Div-down-data-pagebtns-btn:hover {
+                color: #ffffff;
+                background: #460371;
+                border: solid 1px white;
+            }
+
+        .wallet-Div-up-balance-deposit {
+            padding: 9px 30px 7px 30px;
+            /* text-align: center; */
+            color: #ffffffcf;
+            background: #0def0082;
+            border-radius: 48px;
+            margin: 0 15px;
+            border: 0;
+            font-size: 22px;
+        }
+
+            .wallet-Div-up-balance-deposit:hover {
+                background: #198b13;
+            }
+
+        .auth-mainDiv {
+            display: none;
+            position: fixed;
+            /* height: 65%; */
+            width: 488px;
+            /* margin: 18px; */
+            border-radius: 10px;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            background: linear-gradient(to bottom right, #0077bfd6, #006eb99e);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 0 20px 1px rgb(0 0 0);
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .auth-mainDiv-open {
+            display: block;
+        }
+
+        .auth-Div {
+            text-align: center;
+            position: relative;
+        }
+
+        .auth-Div-title {
+            text-align: center;
+            font-size: 246%;
+            font-weight: bold;
+            /* padding: 28px; */
+            background: linear-gradient(to right, red, yellow);
+            -webkit-text-fill-color: #ff31f969;
+            -webkit-background-clip: text;
+        }
+
+        .auth-Div-pass-div {
+            margin: 00 76px;
+            font-size: 15px;
+        }
+
+        .auth-Div-pass-text {
+        }
+
+        .auth-Div-pass-input {
+            width: 100%;
+            padding: 6px 14px;
+            font-size: 37px;
+            border-radius: 37px;
+            border: 2px solid #ffffff7a;
+            text-align: center;
+            background-color: #00000038;
+            color: white;
+            font-weight: bold;
+        }
+
+        .auth-Div-info {
+            display: grid;
+            margin: 13px 0px;
+            color: white;
+        }
+
+        .auth-Div-info-gohome {
+            color: #65c9c9;
+        }
+
+        .auth-Div-info-forget {
+            color: #65c9c9;
+        }
+
+        .auth-Div-btn-div {
+        }
+
+        .auth-Div-confirm-btn {
+            padding: 5px 58px;
+            border: 0;
+            border-radius: 63px;
+            color: white;
+            background: #009b38d1;
+            font-size: 22px;
+            margin: 32px;
+        }
+
+            .auth-Div-confirm-btn:hover {
+                padding: 5px 70px;
+                background: #009b38;
+            }
+
+        .blur2 {
+            filter: blur(10px);
+        }
+
+        .wallet-Div-down-data-table {
+            width: 100%;
+            color: white;
+        }
+
+        .wallet-Div-down-data-tr-head {
+        }
+
+        .wallet-Div-down-data-tr {
+            order-bottom: 1px solid wheat;
+        }
+
+        .wallet-Div-down-data-th {
+            padding: 6px;
+            font-size: 21px;
+            BACKGROUND: #257183;
+        }
+
+        .wallet-Div-down-data-td {
+            padding: 6px;
+            font-size: 19px;
+            text-align: center;
+        }
+
+        .auth-Div-close-Btn {
+            position: absolute;
+            right: 0;
+            background: transparent;
+            border: 0;
+            color: white;
+            font-size: 29px;
+            font-weight: 700;
+        }
+        .wallet-Div-down-div-filter{
+        }
+
+        .wallet-Div-down-bjbv{
+            text-align: center;
+            color: white;
+        }
+
+        .bjbv{}
+        .bjbvv{}
+        .bjbvb{}
+    </style>
+}
+<!--
+
+<h1>MyWallet</h1>
+
+<h1 class="wallet" id="amount"></h1>
+
+<div class="wallet">
+<label>enter amount : </label>
+<input type="number" id="recharge_amount">
+<br>
+<button onclick="Recharge()">Recharge</button>
+</div>
+
+
+<div class="wallet">
+    <input type="radio" name="transtype" value="1" onchange="fetch_payments(1)" /> Credit
+    <input type="radio" name="transtype" value="2" onchange="fetch_payments(2)" /> Debit
+    <button onclick="uncheckRadios()">Fetch_all</button>
+    <table>
+        <thead></thead>
+        <tr>
+            <th>Number</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Opration</th>
+            <th>Descripation</th>
+        </tr>
+        <tbody id="history">
+
+        </tbody>
+    </table>
+
+</div>
+
+
+
+-->
+
+<section class="section-padding section-bg" id="walletDiv">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 mb-5 mb-lg-0">
+                <div class="wallet-Div">
+                    <div class="wallet-Div-up">
+                        <div class="wallet-Div-up-balance">
+                            <h1 class="wallet" id="amount"></h1> 
+                        </div>
+                        <button class="wallet-Div-up-balance-deposit" onclick="recharge()">
+                            Make a recharge
+                        </button>
+                    </div>
+                    <div class="wallet-Div-down">
+                        <div class="wallet-Div-down-title">
+                            HISTORY
+                        </div>
+                        <br>
+                        <div class="wallet-Div-down-div-filter">
+                            <div class="wallet-Div-down-bjbv">
+                                <input class="bjbv" type="radio" name="transtype" value="1" onchange="fetch_payments(2)" /> Credit
+                                <input class="bjbvv" type="radio" name="transtype" value="2" onchange="fetch_payments(1)" /> Debit
+                                <button class="bjbvb"  onclick="uncheckRadios()">Fetch_all</button>
+                            </div>
+                        </div>
+                        <table class="wallet-Div-down-data-table">
+                            <tr class="wallet-Div-down-data-tr-head">
+                                <th class="wallet-Div-down-data-th">No.</th>
+                                <th class="wallet-Div-down-data-th">Date & Time</th>
+                                <th class="wallet-Div-down-data-th">Amount</th>
+                                <th class="wallet-Div-down-data-th">Action</th>
+                                <th class="wallet-Div-down-data-th">Descripation</th>
+                            </tr>
+                            <tbody id="history">
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="auth-mainDiv" id="authenticationPage">
+    <div class="auth-Div">
+        <button class="auth-Div-close-Btn" onclick="closePart()"><i class="ri-close-line"></i></button>
+        <div class="auth-Div-title">Deposite</div>
+        <div class="auth-Div-pass-div">
+            <div class="auth-Div-pass-text">
+                Enter deposite Amount
+            </div>
+            <input type="number" class="auth-Div-pass-input" id="recharge_amount">
+        </div>
+        <div class="auth-Div-btn-div">
+            <button class="auth-Div-confirm-btn" onclick="confimRecharge()">Confirm</button>
+        </div>
+    </div>
+</div>
+<script>
+    function recharge() {
+        document.body.style.overflow = 'hidden'; // Hide overflow to prevent scrollbar
+        walletDiv.classList.add('blur2');
+        authenticationPage.classList.add("auth-mainDiv-open");
+    }
+    function confimRecharge() {
+        Recharge();
+    }
+    function closePart() {
+        document.body.style.overflow = 'visible'; // Restore overflow
+        walletDiv.classList.remove('blur2')
+        authenticationPage.classList.remove("auth-mainDiv-open");
+    }
+</script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        fetch_amount();
+        fetch_payments(0);
+    });
+
+    function fetch_amount(){ 
+        $.ajax({
+            url: '/Wallet/fetch_wallet_amount',
+            type: 'POST',
+            success: function (response) {
+                console.log(response);
+                $("#amount").text("Your Balance : " + response + "₹");
+            }
+        });
+    }
+
+    function fetch_payments(method) {
+        $.ajax({
+            url: '/Wallet/fetch_wallet_history',
+            type: 'POST',
+            data: {method:method},
+            success: function (response) {
+                $("#history").html(response);
+            }
+        });
+    }
+
+    function uncheckRadios() {
+        var radios = document.getElementsByName("transtype");
+        for (var i = 0; i < radios.length; i++) {
+            radios[i].checked = false;
+        }
+        fetch_payments(0);
+    }
+
+    function Recharge() {
+        if (true) {
+            var pay_amount = $("#recharge_amount").val();
+            var amount = parseInt(pay_amount) * 100;
+            console.log(amount);
+            var options = {
+                "key": "rzp_test_IX1Koi8LULfW3g",
+                "amount": amount,
+                "currency": "INR",
+                "name": "Acme Corp",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "handler": function (response) {
+                    console.log(response);
+                    $.ajax({
+                        url: '/Wallet/addMemberAmount',
+                        type: 'POST',
+                        data: { amount: parseInt($("#recharge_amount").val())},
+                        success: function (response) {
+                            console.log(response);
+                            if (response == "success") { 
+                                closePart();
+                                fetch_amount();
+                                fetch_payments(0);
+                            }
+                        }
+                    });
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response) {
+                alert("Payment failed. Please try again later.");
+            });
+
+            rzp1.open();
+        }
+    }
+</script>

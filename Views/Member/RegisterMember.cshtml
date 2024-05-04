@@ -1,0 +1,459 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Layout_Login";
+}
+
+
+<div class="loginBg">
+    <img src="~/Assets/Backgrounds/Background 4.jpg" alt="Background" class="loginBg-img" />
+</div>
+
+
+<div class="row loginfram">
+    <div class="col-md-6 loginfram-left">
+        <img src="~/Assets/Illustration/downloadfile-2.jpg" alt="Background" class="loginStyle-img" />
+    </div>
+    <div class="col-md-6 loginfram-right">
+        <div class="form-area">
+            <div class="logInHeading">Registration</div>
+            <div style="color: red;" id="report"> </div>
+            <div id="stage1">
+                <div class="form-area-field">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">Username</div>
+                        <div class="f-d-error" id="valid_name"></div>
+                    </div>
+                    <input class="form-area-input" id="name" type="text" />
+                </div>
+                <div class="form-area-field">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">Contact</div>
+                        <div class="f-d-error" id="valid_number"></div>
+                    </div>
+                    <input class="form-area-input" id="contact" type="number" />
+                </div>
+                <div class="form-area-field">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">State</div>
+                        <div class="f-d-error" id="valid_state"></div>
+                    </div>
+                    <select class="form-area-input"  onchange="fetch_City()" id="State" type="text">
+                    </select>
+                </div>
+                <div class="form-area-field">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">City</div>
+                        <div class="f-d-error" id="valid_City"></div>
+                    </div>
+                    <select class="form-area-input" onchange="fetch_Area()" id="City" type="text">
+                    </select>
+                </div>
+                <div class="form-area-field">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">Area</div>
+                        <div class="f-d-error" id="valid_area"></div>
+                    </div>
+                    <select class="form-area-input" id="Area" type="select">
+                    </select>
+                </div>
+            </div>
+            <div id="stage2">
+                <div class="form-area-field">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">Email</div>
+                        <div class="f-d-error" id="valid_email">* Error area</div>
+                    </div>
+                    <input class="form-area-input" type="email" id="email" />
+                    <button id="send_otp" onclick="verify_email()"  class="">Send OTP</button>
+                </div>
+                <div class="form-area-field" id="fotp">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">Enter OTP</div>
+                        <div class="f-d-error" id="valid_otp">* Error area</div>
+                    </div>
+                    <input class="form-area-input" type="number" id="otp" />
+                </div>
+            </div>
+            <div id="stage3">
+                <div class="form-area-field">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">Password</div>
+                        <div class="f-d-error" id="valid_password">* Error area</div>
+                    </div>
+                    <input class="form-area-input" id="pass" type="password" />
+                </div>
+                <div class="form-area-field">
+                    <div class="f-d-text-area" type="text">
+                        <div class="f-d-text">Confim password:</div>
+                        <div class="f-d-error" id="valid_compass">* Error area</div>
+                    </div>
+                    <input class="form-area-input" id="compass" type="password" />
+                </div>
+            </div>
+            <div class="form-button-area">
+                <a href="/Member/Home">already have account ?</a>
+                <button class="f-d-submitBtn" id="prevBtn" onclick="PrevBtnCE()">Previous</button>
+                <button class="f-d-submitBtn" id="nextBtn" onclick="NextBtnCE()">Next</button>
+                <button class="f-d-submitBtn" id="loginBtn" onclick="LoginBtnCE()">Registration</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const totalStage = 3;
+    var stageCount = 1;// 1 2 3
+    const stage1 = document.getElementById('stage1');
+    const stage2 = document.getElementById('stage2');
+    const stage3 = document.getElementById('stage3');
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const loginBtn = document.getElementById('loginBtn');
+    function PrevBtnCE() {
+        if (stageCount > 1) {
+            stageCount = stageCount - 1;
+            resetBtnState();
+        }
+    }
+    function NextBtnCE() {
+        if (stageCount == 1) {
+            f2();
+        }else if(stageCount == 2){
+            f3();
+        }
+    }
+    function LoginBtnCE() {
+        if (stageCount == totalStage) {
+            register();
+            resetBtnState();
+        }
+    }
+    function resetBtnState() {
+        prevBtn.classList.add("hideFrame");
+        nextBtn.classList.add("hideFrame");
+        loginBtn.classList.add("hideFrame");
+        allStageHide();
+        if (stageCount == 1) {
+            nextBtn.classList.remove("hideFrame");
+        } else if (stageCount == totalStage) {
+            prevBtn.classList.remove("hideFrame");
+            loginBtn.classList.remove("hideFrame");
+        } else {
+            prevBtn.classList.remove("hideFrame");
+            nextBtn.classList.remove("hideFrame");
+        }
+
+        if (stageCount == 1) {
+            stage1.classList.remove("hideFrame");
+        } else if (stageCount == 2) {
+            stage2.classList.remove("hideFrame");
+        } else if (stageCount == 3) {
+            stage3.classList.remove("hideFrame");
+        }
+    }
+    function allStageHide() {
+        stage1.classList.add("hideFrame");
+        stage2.classList.add("hideFrame");
+        stage3.classList.add("hideFrame");
+    }
+    function resetError() {
+        document.getElementById("regi_username_error").innerHTML = "";
+        document.getElementById("regi_contact_error").innerHTML = "";
+        document.getElementById("state_error").innerHTML = "";
+        document.getElementById("city_error").innerHTML = "";
+        document.getElementById("area_error").innerHTML = "";
+    }
+</script>
+<!--
+
+<div>
+    <div style="color: red;" id="report"> </div>
+    <div id="f1">
+        <div>
+            <label>user name :- </label>
+            <input type="text" id="name" />
+            <div style="color: red;" id="valid_name"></div>
+        </div>
+        <div>
+            <label>contact number :- </label>
+            <input type="number" id="contact" />
+            <div style="color: red;" id="valid_number"></div>
+        </div>
+        <div>
+            <label>Select State :- </label>
+            <select id="State" onchange="fetch_City()"></select>
+            <div style="color: red;" id="valid_state"></div>
+        </div>
+        <div>
+            <label>Select City :- </label>
+            <select id="City" onchange="fetch_Area()"></select>
+            <div style="color: red;" id="valid_City"></div>
+        </div>
+        <div>
+            <label>Select Area :- </label>
+            <select id="Area"></select>
+            <div style="color: red;" id="valid_area"></div>
+        </div>
+        <button onclick="f2()">NEXT</button>
+    </div>
+    <div id="f2">
+        <div>
+            <label>email :- </label>
+            <input type="email" id="email" />
+            <div id="valid_email"></div>
+            <button style="color: red;" id="send_otp" onclick="verify_email()">send OTP</button>
+        </div>
+        <div id="fotp">
+            <label>OTP :- </label>
+            <input type="number" id="otp" />
+            <div style="color: red;" id="valid_otp"></div>
+        </div>
+        <button onclick="Back_f1()">BACK</button>
+        <button onclick="f3()">NEXT</button>
+    </div>
+    <div id="f3">
+        <div>
+            <label>password :- </label>
+            <input type="text" id="pass" />
+            <div style="color: red;" id="valid_password"></div>
+        </div>
+        <div>
+            <label>confirm password :- </label>
+            <input type="password" id="compass" />
+            <div style="color: red;" id="valid_compass"></div>
+        </div>
+        <button onclick="Back_f2()">BACK</button>
+        <button onclick="register()">submit</button>
+    </div>
+    <a href="/Member/Home">already registered</a>
+</div>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    var otp;
+    $(document).ready(function () {
+        /*$("#f1").show();
+        $("#f2").hide();
+        $("#f3").hide();
+        */
+        resetBtnState();
+        $("#fotp").hide();
+        fetch_State();
+        fetch_City();
+        fetch_Area();
+    });
+
+    function fetch_State() {
+        $.ajax({
+            url: '/dropdown/State',
+            method: 'POST',
+            success: function (response) {
+                console.log(response);
+                $("#State").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+    function fetch_City() {
+        var S = $("#State").val();
+        $.ajax({
+            url: '/dropdown/City',
+            method: 'POST',
+            data: { state: S },
+            success: function (response) {
+                console.log(response);
+                $("#City").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+    function fetch_Area() {
+        var C = $("#City").val();
+        $.ajax({
+            url: '/dropdown/Area',
+            method: 'POST',
+            data: { city: C },
+            success: function (response) {
+                console.log(response);
+                $("#Area").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+    function f2() {
+        var name = $("#name").val();
+        var contact = $("#contact").val();
+        var namePattern = /^[a-zA-Z\s]+$/;
+
+        if (name.trim() === "" || contact.trim() === "") {
+            $("#report").text("Please fill in all the details.");
+            return;
+        } else if (!namePattern.test(name)) {
+            $("#valid_name").text("Please enter a valid name (only alphabets and spaces allowed).");
+            return;
+        } else if (name.length > 50) {
+            $("#valid_name").text("Name should not exceed 50 characters.");
+            return;
+        } else if (contact.length !== 10 || isNaN(contact)) {
+            $("#valid_number").text("Please provide a valid 10-digit contact number.");
+            return;
+        }
+
+        $("#report").text("");
+        $("#valid_name").text("");
+        $("#valid_number").text("");
+
+        /*
+        $("#f2").show();
+        $("#f1").hide();
+        $("#f3").hide();*/
+
+        stageCount = stageCount + 1;
+        resetBtnState();
+    }
+
+    function f3() {
+        var email = $("#email").val();
+        var enterd_otp = $.trim($("#otp").val());
+        console.log(enterd_otp, otp);
+
+        if (email == "" || enterd_otp == "") {
+            $("#report").text("Please fill in all details");
+            return;
+        } else if (!/^\d{6}$/.test(enterd_otp)) {
+            $("#valid_otp").text("Please enter a valid 6-digit OTP code");
+            return;
+        }
+        $("#valid_email").text("");
+        $("#valid_otp").text("");
+
+        if (enterd_otp != otp) {
+            $("#report").text("invalid otp");
+            return;
+        } else {
+            $("#report").text("");
+            $("#valid_email").text("");
+            $("#valid_otp").text("");
+            stageCount = stageCount + 1;
+            resetBtnState();
+            /*
+            $("#f3").show();
+            $("#f1").hide();
+            $("#f2").hide();*/
+        }
+    }
+
+    function Back_f1() {
+        /*
+        $("#f1").show();
+        $("#f2").hide();
+        $("#f3").hide();*/
+    }
+
+    function Back_f2() {
+        /*
+        $("#f2").show();
+        $("#f1").hide();
+        $("#f3").hide();*/
+    }
+
+    function verify_email() {
+        const email = $('#email').val();
+        if (email == "") {
+            $("#valid_email").text("please fill email");
+            return;
+        }
+        $.ajax({
+            url: 'checkEmail',
+            method: 'POST',
+            data: { email: email },
+            success: function (response) {
+                if (response == "exist") {
+                    $("#valid_email").text('Email alredy exist in the system.');
+                } else if (response == "notValid") {
+                    $("#valid_email").text('Please enter a valid email.');
+                } else if (response == "send") {
+                    $('#valid_email').html('otp is sending...');
+                    sendOTP(email);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+
+    }
+
+    function sendOTP(email) {
+        $.ajax({
+            url: 'sendOtp',
+            type: 'POST',
+            data: { email: email },
+            success: function (response) {
+                console.log(response);
+                otp = response;
+                $('#valid_email').html('otp has sended to email');
+                $("#fotp").show();
+            },
+            error: function (xhr, status, error) {
+                console.error('Error sending email:', error);
+            }
+        });
+    }
+
+    function register() {
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var contact = $("#contact").val();
+        var pass = $("#pass").val();
+        var compass = $("#compass").val();
+        var area = $("#Area").val();
+
+        if (pass == "") {
+            $("#valid_password").text("please enter password");
+            return;
+        } else if (!pass.match(/[a-z]/g)) {
+            $("#valid_password").text("Password must include small character");
+            return;
+        } else if (!pass.match(/[A-Z]/g)) {
+            $("#valid_password").text("Password must include Capital character");
+            return;
+        } else if (!pass.match(/[0-9]/g)) {
+            $("#valid_password").text("Password must include Number digits");
+            return;
+        } else if (pass.length <= 6) {
+            $("#valid_password").text("Password must be more than 6 latters");
+            return;
+        } else if (pass != compass) {
+            $("#valid_compass").text("plase, cheack comfirm password");
+            return;
+        }
+
+        $("#valid_password").text("");
+        $("#valid_compass").text("");
+        $.ajax({
+            url: 'Registeration',
+            method: 'POST',
+            data: { username: name, password: pass, email: email, contact: contact, area: area },
+            success: function (response) {
+                console.log(response);
+                window.location.href = '/Member/Home';
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,260 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "AdminLayout";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/css/NewCSS/ClubManager.css" />
+}
+
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Add Club Manager
+                    </div>
+                </div>
+            </div>
+            <div class="row manageGameMain-table-div">
+                <div class="col-lg-8 manageGameMain-div-rightC">
+                    <div class="form-area">
+                        <div class="logInHeading">Details</div>
+                        <div class="f-d-error" id="error"></div>
+
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Username</div>
+                                <div class="f-d-error" id="valid_name"></div>
+                            </div>
+                            <input class="form-area-input" type="text" id="name" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Contact Number</div>
+                                <div class="f-d-error" id="valid_number"></div>
+                            </div>
+                            <input class="form-area-input" type="number" id="contact" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Email</div>
+                                <div class="f-d-error" id="valid_email"></div>
+                            </div>
+                            <input class="form-area-input" type="text" id="email" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Select State</div>
+                                <div class="f-d-error" id="valid_state"></div>
+                            </div>
+                            <select class="form-area-input" id="State" onchange="fetch_City()" ></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Select City</div>
+                                <div class="f-d-error" id="valid_City"></div>
+                            </div>
+                            <select class="form-area-input" id="City" onchange="fetch_Area()" ></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Select Area</div>
+                                <div class="f-d-error" id="valid_area"></div>
+                            </div>
+                            <select class="form-area-input" id="Area" ></select>
+                        </div>
+
+
+                        <button class="f-d-submitBtn" onclick="register()">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+<div> Manager Register</div>
+<br>
+<div>
+    <div style="color: red;" id="report"> </div>
+    <div>
+        <div>
+            <label>user name :- </label>
+            <input type="text" id="name" />
+            <div style="color: red;" id="valid_name"></div>
+        </div>
+        <div>
+            <label>contact number :- </label>
+            <input type="number" id="contact" />
+            <div style="color: red;" id="valid_number"></div>
+        </div>
+        <div>
+            <label>Select State :- </label>
+            <select id="State" onchange="fetch_City()"></select>
+            <div style="color: red;" id="valid_state"></div>
+        </div>
+        <div>
+            <label>Select City :- </label>
+            <select id="City" onchange="fetch_Area()"></select>
+            <div style="color: red;" id="valid_City"></div>
+        </div>
+        <div>
+            <label>Select Area :- </label>
+            <select id="Area"></select>
+            <div style="color: red;" id="valid_area"></div>
+        </div>
+        <div>
+            <label>email :- </label>
+            <input type="email" id="email" />
+            <div style="color: red;" id="valid_email"></div>
+        </div>
+    </div>
+    <button onclick="register()">Register</button>
+</div>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        fetch_State();
+        $("#State").val($("#State option:first").val());
+        fetch_City();
+        $("#City").val($("#City option:first").val());
+        fetch_Area();
+        $("#Area").val($("#Area option:first").val());
+    });
+
+    function fetch_State() {
+        $.ajax({
+            url: '/dropdown/State',
+            method: 'POST',
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#State").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+    function fetch_City() {
+        var S = $("#State").val();
+        $.ajax({
+            url: '/dropdown/City',
+            method: 'POST',
+            data: { state: S },
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#City").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+    function fetch_Area() {
+        var C = $("#City").val();
+        $.ajax({
+            url: '/dropdown/Area',
+            method: 'POST',
+            data: { city: C },
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#Area").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+    function verify_email() {
+        const email = $('#email').val();
+        if (email == "") {
+            $("#valid_email").text("please fill email");
+            return true;
+        }
+        $.ajax({
+            url: '/MemberRegister/heckEmail',
+            method: 'POST',
+            data: { email: email },
+            success: function (response) {
+                if (response == "exist") {
+                    $("#valid_email").text('Email alredy exist in the system.');
+                    return true;
+                } else if (response == "notValid") {
+                    $("#valid_email").text('Please enter a valid email.');
+                    return true;
+                } else if (response == "send") {
+                    return false;
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+
+    }
+
+    function register() {
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var contact = $("#contact").val();
+        var area = $("#Area").val();
+
+        var namePattern = /^[a-zA-Z\s]+$/;
+
+
+        $("#report").text("");
+        $("#valid_name").text("");
+        $("#valid_number").text("");
+        $("#valid_email").text("");
+
+        if (name.trim() === "") {
+            $("#report").text("Please fill in all the details.");
+            return;
+        } else if (!namePattern.test(name)) {
+            $("#valid_name").text("Please enter a valid name (only alphabets and spaces allowed).");
+            return;
+        } else if (name.length > 50) {
+            $("#valid_name").text("Name should not exceed 50 characters.");
+            return;
+        } else if (contact.length !== 10 || contact.trim() === "") {
+            $("#valid_number").text("Please provide a valid 10-digit contact number.");
+            return;
+        } else if (area === "") {
+            $("#valid_area").text("Please select Area");
+            return;
+        } else if (verify_email()) {
+            return;
+        }
+
+        $("#report").text("");
+        $("#valid_name").text("");
+        $("#valid_number").text("");
+        $("#valid_email").text("");
+
+
+        $.ajax({
+            url: '/Admin/RegisterationManager',
+            method: 'POST',
+            data: { username: name, email: email, contact: contact, area: area },
+            success: function (response) {
+                console.log(response);
+                if (response == "success") {
+                    window.location.href = '/Admin/ManageClubView';
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+</script>

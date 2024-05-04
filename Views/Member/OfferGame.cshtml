@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "OfferGame";
+    Layout = "MemberLayout";
+}
+
+<section class="section-padding" id="section_3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center mb-4">
+                <h2 class="h2Title2">Offers Games</h2>
+            </div>
+            <div class="row" id="OfferGames">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        fetch_Game();
+    });
+
+    function fetch_Game(){
+        $.ajax({
+            url: '/Game/OfferGames',
+            type: 'POST',
+            success: function (response) {
+                $("#OfferGames").html(response);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,544 @@
+﻿@{
+    ViewData["Title"] = "ManagerProfile";
+    Layout = "ManagerLayout";
+}
+<div class="profile-Title">
+    My Profile
+</div>
+<div class="profile-main-fram">
+    <div class="row">
+        <div class="col-lg-6 noPadding">
+            <div class="profile-leftSide">
+                <img class="profile-image-2" id="image" src="" alt="Profile Image">
+                <div class="p-user-name" id="Username">
+                    Darvin Dobariya
+                </div>
+                <div class="box-3X">
+                    <button class="btn-threeX" onclick="ProfileUpdate()">
+                        Change profile image
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 noPadding">
+            <div class="profile-rightSide">
+                <div class="showingFrame" id="UserProfile">
+                    <div class="profile-title">Profile Data</div>
+                    <div class="profile-detailsArea">
+                        <div class="profile-details">
+                            <div class="profile-details-left">Contact :</div>
+                            <div class="profile-details-right" id="Contact">99-999-99999</div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-details-left">E-mail :</div>
+                            <div class="profile-details-right" id="Email">21bmiit021@gmail.com</div>
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-details-left">Area :</div>
+                            <div class="profile-details-right" id="Area">21bmiit021@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="box-update">
+                        <button class="update-threeX" onclick="updateBtnCE()">
+                            Update
+                        </button>
+                    </div>
+                    <div class="box-reset">
+                        <button class="reset-threeX" onclick="resetBtnCE()">
+                            Reset password
+                        </button>
+                    </div>
+                </div>
+                <div class="hideFrame" id="UpdateProfile">
+                    <div class="profile-title">Update Profile</div>
+                    <div class="profile-detailsArea">
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Name</div>
+                                <div class="f-d-error" id="valid_name"></div>
+                            </div>
+                            <input class="form-area-input" id="NewUsername" type="text" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">State</div>
+                                <div class="f-d-error" id="valid_state"></div>
+                            </div>
+                            <select class="form-area-input" id="NewState" type="number"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">City</div>
+                                <div class="f-d-error" id="valid_city"></div>
+                            </div>
+                            <select class="form-area-input" id="NewCity" type="number"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Area</div>
+                                <div class="f-d-error" id="valid_area"></div>
+                            </div>
+                            <select class="form-area-input" id="NewArea" type="number"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Contact</div>
+                                <div class="f-d-error" id="valid_number"></div>
+                            </div>
+                            <input class="form-area-input" id="NewContact" type="number" />
+                        </div>
+                    </div>
+                    <div class="box-3Y">
+                        <button class="btn-threeY" id="" onclick="saveBtnCE()">
+                            Save
+                        </button>
+                    </div>
+                </div>
+                <div class="hideFrame" id="ResetPassword">
+                    <div class="profile-title">Change Password</div>
+                    <div class="profile-detailsArea">
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Old Password</div>
+                                <div class="f-d-error" id="valid_oldpassword"></div>
+                            </div>
+                            <input class="form-area-input" id="oldPass" type="password" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">New Password</div>
+                                <div class="f-d-error" id="valid_password"></div>
+                            </div>
+                            <input class="form-area-input" id="pass" type="text" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Confirm Password</div>
+                                <div class="f-d-error" id="valid_compass"></div>
+                            </div>
+                            <input class="form-area-input" id="comPass" type="password" />
+                        </div>
+                    </div>
+                    <div class="box-3Y">
+                        <button class="btn-threeY" id="" onclick="changeBtnCE()">
+                            Change
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<img src="" alt="ProfileImage" id="image" style="width: 200px; height: 200px;"></img>
+<br>
+<button onclick="ProfileUpdate()">Change Image</button>
+
+
+<div id="UserProfile">
+    <label>Email: </label><label id="Email"></label><br>
+    <label>Username: </label><label id="Username"></label><br>
+    <label>Area: </label><label id="Area"></label><br>
+    <label>Contact: </label><label id="Contact"></label><br>
+    <button onclick="SaveUpdate()">Update information</button><br>
+    <button onclick="ResetPassword()">Reset Password</button><br>
+</div>
+
+<div id="UpdateProfile">
+    <label>Username: </label><input type="text" id="NewUsername" /><div style="color: red;" id="valid_name"></div><br>
+    <label>State: </label><select id="NewState" onchange="fetch_City()"></select><div style="color: red;" id="valid_state"></div><br>
+    <label>City: </label><select id="NewCity" onchange="fetch_Area()"></select><div style="color: red;" id="valid_city"></div><br>
+    <label>Area: </label><select id="NewArea"></select><div style="color: red;" id="valid_area"></div><br>
+    <label>Contact: </label><input type="number" id="NewContact" /><div style="color: red;" id="valid_number"></div><br>
+    <button onclick="Back()">Back</button>
+    <button onclick="Save()">Save Update</button><br>
+</div>
+
+<div id="ResetPassword">
+    <label>Enter old password : </label><input type="text" placeholder="old password" id="oldPass" /> <div style="color: red;" id="valid_oldpassword"></div><br>
+    <label>Enter new password : </label><input type="text" placeholder="new password" id="pass" /> <div style="color: red;" id="valid_password"></div><br>
+    <label>Enter confirm password : </label><input type="password" placeholder="confirm password" id="comPass" /> <div style="color: red;" id="valid_compass"></div><br>
+    <button onclick="Back()">Back</button>
+    <button onclick="Reset()">Reset Password</button>
+</div>
+-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    const ProfileView = document.getElementById('UserProfile');
+    const updateProfile = document.getElementById('UpdateProfile');
+    const resetPass = document.getElementById('ResetPassword');
+
+    function showProfileView() {
+        ProfileView.classList.remove("hideFrame");
+        ProfileView.classList.add("showingFrame");
+    }
+    function hideProfileView() {
+        ProfileView.classList.add("hideFrame");
+        ProfileView.classList.remove("showingFrame");
+    }
+    function showUpdateProfile() {
+        updateProfile.classList.remove("hideFrame");
+        updateProfile.classList.add("showingFrame");
+    }
+    function hideUpdateProfile() {
+        updateProfile.classList.add("hideFrame");
+        updateProfile.classList.remove("showingFrame");
+    }
+    function showResetPass() {
+        resetPass.classList.remove("hideFrame");
+        resetPass.classList.add("showingFrame");
+    }
+    function hideResetPass() {
+        resetPass.classList.add("hideFrame");
+        resetPass.classList.remove("showingFrame");
+    }
+    function updateBtnCE() {
+        hideProfileView();
+        showUpdateProfile();
+        //akshill call backk
+        SaveUpdate();
+    }
+    function resetBtnCE() {
+        hideProfileView();
+        showResetPass();
+        //akshill call backk
+        ResetPassword()
+    }
+    function saveBtnCE() {
+        //akshill call backk
+        Save();
+    }
+    function changeBtnCE() {
+
+        //akshill call backk
+        Reset();
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        /*
+        $("#UserProfile").show();
+        $("#ResetPassword").hide();
+        $("#UpdateProfile").hide();
+        */
+        fetchUserProfile(1);
+    });
+
+    function fetch_City() {
+        var id = $("#NewState").val();
+        $.ajax({
+            url: '/DropDown/City',
+            type: 'POST',
+            data: { state: id },
+            success: function (response) {
+                $("#NewCity").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function fetch_Area() {
+        var id = $("#NewCity").val();
+        $.ajax({
+            url: '/DropDown/Area',
+            type: 'POST',
+            data: { city: id },
+            success: function (response) {
+                $("#NewArea").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+
+    function state() {
+        $.ajax({
+            url: '/DropDown/State',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                $("#NewState").empty();
+                $("#NewState").html(response);
+            }
+        });
+    }
+
+    function city(id) {
+        $.ajax({
+            url: '/DropDown/City',
+            type: 'POST',
+            async: false,
+            data: { state: id },
+            success: function (response) {
+                $("#NewCity").empty();
+                $("#NewCity").html(response);
+            }
+        });
+    }
+
+    function area(id) {
+        $.ajax({
+            url: '/DropDown/Area',
+            type: 'POST',
+            async: false,
+            data: { city: id },
+            success: function (response) {
+                $("#NewArea").empty();
+                $("#NewArea").html(response);
+            }
+        });
+    }
+
+
+    function fetchUserProfile(mode) {
+        $.ajax({
+            type: 'POST',
+            url: '/Profile/fetchUser',
+            success: function (userData) {
+                console.log(userData);
+                if (mode == 1) {
+                    document.getElementById('image').src = `http://localhost:5003/Assets/User/${userData['image']}`;
+                    $('#Username').text(userData['name']);
+                    $('#Contact').text(userData['contact']);
+                    $('#Area').text(userData['area_name']);
+                    $('#Email').text(userData['email']);
+                } else if (mode == 2) {
+                    $('#NewUsername').val(userData['name']);
+                    $('#NewContact').val(userData['contact']);
+
+                    state();
+                    city(userData['state']);
+                    area(userData['city']);
+
+                    $("#NewState").val(userData['state']);
+                    $("#NewCity").val(userData['city']);
+                    $("#NewArea").val(userData['area']);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log('Error fetching user data.', error, status, xhr);
+            }
+        });
+    }
+
+    function SaveUpdate() {
+        /*$("#UserProfile").hide();
+        $("#ResetPassword").hide();
+        $("#UpdateProfile").show();*/
+        fetchUserProfile(2);
+    }
+
+    function ResetPassword() {
+        /*
+        $("#UserProfile").hide();
+        $("#UpdateProfile").hide();
+        $("#ResetPassword").show();
+        */
+    }
+
+    function Back() {
+        /*
+        $("#UpdateProfile").hide();
+        $("#ResetPassword").hide();
+        $("#UserProfile").show();
+        */
+    }
+
+    function Save() {
+        var name = $("#NewUsername").val();
+        var contact = $("#NewContact").val();
+        var area = $("#NewArea").val();
+        var namePattern = /^[a-zA-Z\s]+$/;
+
+        cleaner();
+
+        if (!namePattern.test(name)) {
+            $("#valid_name").text("Please enter a valid name (only alphabets and spaces allowed).");
+            return;
+        } else if (name.length > 50) {
+            $("#valid_name").text("Name should not exceed 50 characters.");
+            return;
+        } else if (contact.length !== 10 || isNaN(contact)) {
+            $("#valid_number").text("Please provide a valid 10-digit contact number.");
+            return;
+        }
+
+        cleaner();
+
+        $.ajax({
+            url: '/Profile/updateUser',
+            type: 'POST',
+            data: { Name: name, contact: contact, area: area },
+            success: function (response) {
+                if (response !== "success") {
+                    alert("error updating image : ", response);
+                } else {
+                    fetchUserProfile(1);
+                    showProfileView();
+                    hideUpdateProfile();
+
+                    /*
+                    $("#UpdateProfile").hide();
+                    $("#ResetPassword").hide();
+                    $("#UserProfile").show();
+                    */
+                }
+            }
+        });
+    }
+
+    function Reset() {
+        var email = $("#Email").val();
+        var oldPass = $("#oldPass").val();
+        var pass = $("#pass").val();
+        var compass = $("#comPass").val();
+
+        cleaner();
+
+        console.log(oldPass, email, pass, compass);
+        if (pass == "") {
+            $("#valid_password").text("please enter password");
+            return;
+        } else if (!pass.match(/[a-z]/g)) {
+            $("#valid_password").text("Password must include small character");
+            return;
+        } else if (!pass.match(/[A-Z]/g)) {
+            $("#valid_password").text("Password must include Capital character");
+            return;
+        } else if (!pass.match(/[0-9]/g)) {
+            $("#valid_password").text("Password must include Number digits");
+            return;
+        } else if (pass.length <= 6) {
+            $("#valid_password").text("Password must be more than 6 latters");
+            return;
+        } else if (pass != compass) {
+            $("#valid_compass").text("plase, cheack comfirm password");
+            return;
+        }
+
+        cleaner();
+
+        $.ajax({
+            url: '/Profile/resetPassword',
+            method: 'POST',
+            data: { oldpass: oldPass, email: email, password: pass },
+            success: function (response) {
+                console.log(response);
+                if (response == "old") {
+                    $("#valid_oldpassword").text("old password is wrong");
+                }
+                else if (response == "success") {
+                    showProfileView();
+                    hideResetPass();
+                    /*
+                    $("#UpdateProfile").hide();
+                    $("#ResetPassword").hide();
+                    $("#UserProfile").show();
+                    */
+                    $("oldPass").val();
+                    $("pass").val();
+                    $("compass").val();
+                }
+                else {
+                    console.log("error");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+    function save_image(filename) {
+        $.ajax({
+            url: '/Profile/updateImage',
+            type: 'POST',
+            data: { img: filename },
+            success: function (response) {
+                if (response !== "success") {
+                    alert("error updating image : ", response);
+                } else {
+                    fetchUserProfile(1);
+                    window.location.href = '/Manager/Profile'
+                }
+            }
+        });
+    }
+
+    function uploadImage(selectedFile) {
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+
+        $.ajax({
+            url: '/Upload/User',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            async: false,
+            success: function (response) {
+                if (response.success) {
+                    $("#uploadStatus").text("Upload successful!");
+                } else {
+                    $("#uploadStatus").text("Upload failed: " + response.message);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $("#uploadStatus").text("Upload error: " + errorThrown);
+            }
+        });
+    }
+
+    function ProfileUpdate() {
+        const fileInput = document.createElement('input');
+        var fileName;
+        fileInput.type = 'file';
+        fileInput.accept = '.jpg, .jpeg, .png, .webp';
+        fileInput.style.display = 'none';
+        fileInput.click();
+        fileInput.addEventListener('change', function () {
+            const selectedFile = fileInput.files[0];
+            if (selectedFile) {
+                fileName = selectedFile.name;
+                if (isAllowedFileType(fileName)) {
+                    uploadImage(selectedFile);
+                    save_image(fileName);
+                } else {
+                    alert('Invalid file type. Please select a jpg, jpeg, png, or webp image.');
+                }
+            }
+        });
+    }
+
+    function isAllowedFileType(fileName) {
+        const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+        const extension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+        return allowedExtensions.includes(extension);
+    }
+
+    function cleaner() {
+        $("#valid_name").text("");
+        $("#valid_number").text("");
+        $("#valid_password").text("");
+        $("#valid_oldpassword").text("");
+        $("#valid_compass").text("");
+    }
+
+</script>
+
+<script type="text/javascript">
+    function preventBack() {
+        window.history.forward();
+    }
+
+    setTimeout("preventBack()", 0);
+
+    window.onunload = function () { null };
+</script>

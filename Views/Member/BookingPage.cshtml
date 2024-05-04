@@ -1,0 +1,365 @@
+﻿@{
+    ViewData["Title"] = "BookingPage";
+    var amount = ViewBag.Rant;
+    var offer = ViewBag.Offer;
+    var discountedAmount = amount - (amount * offer / 100);
+    var disamount = (amount * offer / 100);
+    Layout = "MemberLayout";
+}
+@section styles {
+    <style>
+
+        /*Update slider*/
+        .booking-container {
+            max-width: 600px;
+            /* margin: 18px; */
+            border-radius: 23px;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            background: linear-gradient(to bottom right, #ffffffb5, #ffffffc7);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 0 20px 1px rgb(0 0 0);
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            
+            margin:auto;
+        }
+
+        .booking-container-open {
+            display: block;
+        }
+
+        .bookingForm {
+            text-align: center;
+        }
+
+        .booking-title {
+            text-align: center;
+            font-size: 246%;
+            font-weight: bold;
+            /* padding: 28px; */
+            background: linear-gradient(to right, red, yellow);
+            -webkit-text-fill-color: #ff31f969;
+            -webkit-background-clip: text;
+        }
+
+        .booking-fields {
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .booking-deatils {
+            display: flex;
+            margin-left: 11%;
+            margin-right: 11%;
+            padding-bottom: 16px;
+        }
+
+        .booking-deatils-name {
+            width: 37%;
+            font-size: 22px;
+            color: #ffffffa8;
+        }
+
+        .booking-member-details {
+            /* background: #7e1baf5e; */
+            background: #00789d75;
+            border-radius: 17px;
+            padding: 13px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .booking-game-details {
+            background: #028691;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            /* padding: 0px; */
+            padding-left: 18px;
+            padding-top: 5px;
+            padding-bottom: 1px;
+            font-size: 22px;
+        }
+
+        .booking-g-d-left {
+        }
+
+        .booking-g-d-right {
+        }
+
+        .booking-m-d-area {
+            margin-top: 38px;
+            padding-left: 40px;
+            padding-right: 40px;
+            font-size: 19px;
+        }
+
+        .booking-m-d-area-div {
+            display: flex;
+        }
+
+        .booking-m-d-left {
+            width: 50%;
+            text-align: end;
+            padding-right: 6px;
+        }
+
+        .booking-m-d-right {
+            width: 50%;
+            text-align: initial;
+        }
+
+        .booking-m-area {
+            /* background: #7e1baf5e; */
+            background: #00789d75;
+            border-radius: 17px;
+            padding: 13px;
+            margin-top: 10px;
+            display: flex;
+        }
+
+        .booking-m-text {
+            width: 53%;
+        }
+
+        .booking-m-input {
+            width: 48%;
+        }
+
+        .booking-bill-area {
+            /* background: #7e1baf5e; */
+            background: #00789d75;
+            border-radius: 17px;
+            padding: 13px;
+            margin-top: 10px;
+        }
+
+        .booking-bill-deatils {
+            display: flex;
+            /* padding-left: 13px; */
+            padding: 0px;
+            padding-left: 12px;
+            padding-right: 12px;
+            font-size: 21px;
+        }
+
+        .booking-b-d-left {
+            width: 50%;
+            text-align: left;
+        }
+
+        .booking-b-d-right {
+            width: 50%;
+            text-align: right;
+        }
+
+        .booking-button {
+            border: 0;
+            color: #ffffff;
+            /* background: #571eff; */
+            background: #0aaf20;
+            width: 50%;
+            padding: 10px;
+            font-size: 24px;
+            border-radius: 29px;
+            border: 0;
+            margin-top: 10px;
+            box-shadow: 0px 0px 0px 0px rgb(0 0 0);
+        }
+
+            .booking-button:hover {
+                width: 100%;
+                box-shadow: 0px 0px 20px 0px rgb(138, 138, 138);
+            }
+
+        .booking-bill-deatils-line {
+            margin: 10px;
+            background-color: white;
+            border: none;
+            height: 2px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="~/css/NewCSS/slotSchedule.css" />
+}
+
+<div class="booking-container booking-container-open" id="Bookingslider">
+    <div class="bookingForm">
+        <div class="booking-title">Slot booking</div>
+        <div class="booking-fields">
+            <div class="booking-member-details">
+                <div class="booking-game-details">
+                    <div class="booking-g-d-left">@ViewBag.Game_name</div>
+                    <div class="booking-g-d-right"> | @ViewBag.Club_name Club</div>
+                </div>
+                <div class="booking-m-d-area">
+                    <div class="booking-m-d-area-div">
+                        <div class="booking-m-d-left">Date & Time : </div>
+                        <div class="booking-m-d-right">@ViewBag.Slot_date | @ViewBag.Slot_time</div>
+                    </div>
+                    <div class="booking-m-d-area-div">
+                        <div class="booking-m-d-left">Member Details : </div>
+                        <div class="booking-m-d-right">@ViewBag.Member_name | @ViewBag.Contact</div>
+                    </div>
+                    <div class="booking-m-d-area-div">
+                        <div class="booking-m-d-left">Play Duration : </div>
+                        <div class="booking-m-d-right">@ViewBag.Duration</div>
+                    </div>
+                </div>
+            </div>
+            <div class="booking-m-area">
+                <div class="booking-m-text">Enter a number of member : </div>
+                <select id="members" class="booking-m-input" onchange="cal_amount()">
+                    @Html.Raw(ViewBag.Members)
+                </select>
+            </div>
+            <div class="booking-bill-area">
+                <div class="booking-bill-deatils">
+                    <div class="booking-b-d-left">Rent : </div>
+                    <div class="booking-b-d-right">@ViewBag.Rant ₹</div>
+                </div>
+                <div class="booking-bill-deatils">
+                    <div class="booking-b-d-left">GST 9% : </div>
+                    <div class="booking-b-d-right" id="charge"></div>
+                </div>
+                <div class="booking-bill-deatils">
+                    <div class="booking-b-d-left">Offer : </div>
+                    <div class="booking-b-d-right" id="offer"> - @disamount ₹ </div>
+                </div>
+                <hr class="booking-bill-deatils-line">
+                <div class="booking-bill-deatils">
+                    <div class="booking-b-d-left">Total : </div>
+                    <div class="booking-b-d-right" id="amount"></div>
+                </div>
+            </div>
+
+            <button class="booking-button" id="conf" onclick="Book_slot()">Book slot</button>
+            <button class="booking-button" id="Wallet" onclick="Wallet()">Wallet Pay</button>
+            <button class="booking-button" id="Pay" onclick="Pay()">Direct Pay</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#members option:first').prop('selected', true);
+        cal_amount();
+        console.log($("#members").val());
+        $("#Wallet").hide();
+        $("#Pay").hide();
+        $("#conf").show();
+    });
+
+
+    function cal_amount() {
+        var selectedOption = $("#members").val();
+        var PayAmount;
+        if (@ViewBag.Charge_method == 1) {
+            PayAmount = @discountedAmount * selectedOption;
+        } else {
+            PayAmount = @discountedAmount;
+        }
+        cal_charge(PayAmount);
+    }
+
+    function cal_charge(PayAmount) {
+        var charge = PayAmount * 0.05;
+        $("#charge").text(" + " + charge + " ₹");
+        $("#amount").text(PayAmount + charge);
+    }
+
+    function Book_slot() {
+        $("#conf").hide();
+        $("#Wallet").show();
+        $("#Pay").show();
+    }
+
+    function Recharge() {
+        if (true) {
+            var pay_amount = parseInt($("#amount").text());
+            var amount = parseInt(pay_amount) * 100;
+            var options = {
+                "key": "rzp_test_IX1Koi8LULfW3g",
+                "amount": amount,
+                "currency": "INR",
+                "name": "Acme Corp",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "handler": function (response) {
+                    console.log(response);
+                    booking(1);
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response) {
+                alert("Payment failed. Please try again later.");
+            });
+            rzp1.open();
+        }
+    }
+
+    // simple payment , and tracking of payment // booking on simple payment
+
+    function Wallet() {
+        var m = $("#members").val();
+        var amount = parseInt($("#amount").text());
+        $.ajax({
+            url: '/Booking/checkWallet',
+            type: 'POST',
+            data: { memberId: @ViewBag.Member_id, amount: amount },
+            success: function (response) {
+                console.log(response);
+                if (!response) {
+                    alert("insufficient balance");
+                }
+                else {
+                    booking(0);
+                }
+            }
+        });
+    }
+
+    function booking(method) {
+        var m = $("#members").val();
+        var amount = parseInt($("#amount").text());
+        var game_name = '@ViewBag.Game_name';
+        console.log(amount);
+        $.ajax({
+            url: '/Booking/BookSlot',
+            type: 'POST',
+            data: { slotId: @ViewBag.Id, memberId: @ViewBag.Member_id, players: m, amount: amount, Payment_method: method, game_name: game_name },
+            success: function (response) {
+                console.log(response);
+                if (response == "success") {
+                    alert("payment succesfull");
+                    window.location.href = '/Member/MyBooingsView';
+                }
+            }
+        });
+    }
+
+    function Pay() {
+        Recharge();
+    }
+
+</script>
+
+<script type="text/javascript">
+    function preventBack() {
+        window.history.forward();
+    }
+
+    setTimeout("preventBack()", 0);
+
+    window.onunload = function () { null };
+</script>

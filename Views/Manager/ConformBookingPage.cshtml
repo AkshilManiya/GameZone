@@ -1,0 +1,233 @@
+﻿
+@{
+    ViewData["Title"] = "ConformBookingPage";
+    Layout = "ManagerLayout";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/css/NewCSS/ClubManager.css" />
+    <style>
+        
+    </style>
+}
+
+
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Add Game
+                    </div>
+                </div>
+            </div>
+            <div class="row manageGameMain-table-div">
+                <div class="col-lg-6 manageGameMain-div-leftC">
+                    <div class="g-g-f" style="">
+                        <img class="m-d-lc-img" id="qr-code-img" alt="ProfileImage" id="image">
+                    </div>
+
+                    <div id="result"></div>
+                    <button class="m-d-lc-img-btn" onclick="selectImage()">Change Image</button>
+                </div>
+                <div class="col-lg-6 manageGameMain-div-rightC">
+                    <div class="form-area">
+                        <div class="logInHeading">Details</div>
+                        <div class="f-d-error" id="error"></div>
+
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Game name:</div>
+                                <div class="f-d-text" id="gameName"> </div>
+                                <div class="f-d-error" id="nameerror"></div>
+                            </div>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Member name :</div>
+                                <div class="f-d-text" id="memberName"> </div>
+                                <div class="f-d-error" id="membererror"></div>
+                            </div>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Slot Date :</div>
+                                <div class="f-d-text" id="slotDate"> </div>
+                                <div class="f-d-error" id="captionerror"></div>
+                            </div>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Slot time : </div>
+                                <div class="f-d-text" id="slotTime"> </div>
+                                <div class="f-d-error" id="valid_name"></div>
+                            </div>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">total amount : </div>
+                                <div class="f-d-text" id="totalAmount"> </div>
+                                <div class="f-d-error" id="valid_name"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Players : </div>
+                                <div class="f-d-text" id="Players"> </div>
+                                <div class="f-d-error" id="valid_name"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="m-d-rc-input-div">
+                        <label>Enter Game name : </label>
+                        <label id="nameerror"></label>
+                        <input type="text" placeholder="enter Game name" id="GameName">
+                    </div>
+
+                    <div class="m-d-rc-input-div">
+                        <label>Enter Game Members : </label>
+                        <label id="membererror"></label>
+                        <input type="text" placeholder="enter Game Member" id="GameMember">
+                    </div>
+
+                    <div class="m-d-rc-input-div">
+                        <label>Enter Game Caption : </label>
+                        <input type="text" placeholder="enter Game Caption" id="GameCap">
+                        <label id="captionerror"></label>
+                    </div>
+
+                    <div class="m-d-rc-input-div">
+                        <label>Enter Game offer : </label>
+                        <label id="offererror"></label>
+                        <input type="number" placeholder="enter Game offer" id="GameOffer">
+                    </div>
+
+                    <div class="m-d-rc-input-div">
+
+                        <label>select Charge method : </label>
+                        <label id="chargeerror"></label><br>
+                        <input type="radio" name="chargeMethod" id="perPerson" value="1">Per Person<br>
+                        <input type="radio" name="chargeMethod" id="perHour" value="2">Per Hour<br>
+                    </div>
+
+                    <div class="m-d-rc-input-div">
+                        <button class="m-d-rc-button" onclick="updategame()">Update Game</button>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+
+<h1>ConformBookingPage</h1>
+
+<div>
+    <input type="number" id="Booking_id">
+    <button onclick="confirm()">Search</button>
+</div>
+
+<div>
+    <button onclick="selectImage()">Select Image</button>
+    <img id="qr-code-img" alt="" />
+
+    <div id="result"></div>
+</div>
+
+<div>
+    <table>
+
+    <tr><th>Game name</th><td id="gameName"></td></tr>
+    <tr><th>Member name</th><td id="memberName"></td></tr>
+    <tr><th>Slot date</th><td id="slotDate"></td></tr>
+    <tr><th>Slot time</th><td id="slotTime"></td></tr>
+    <tr><th>Total Amount</th><td id="totalAmount"></td></tr>
+    <tr><th>Players</th><td id="Players"></td></tr>
+    </table>
+</div>
+
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function selectImage() {
+        var input = document.createElement('input');
+        input.type = 'file';
+        input.onchange = function (e) {
+            var file = e.target.files[0];
+            if (file) {
+                displayQRCodeImage(file);
+                decodeQRCode(file);
+            }
+        };
+        input.click();
+    }
+
+    function displayQRCodeImage(file) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#qr-code-img').attr('src', e.target.result).show();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function confirm(){
+        var id = $("#Booking_id").val();
+        fetch_detail(id);
+    }
+
+    function decodeQRCode(file) {
+        var formData = new FormData();
+        formData.append('file', file);
+        $.ajax({
+            url: 'http://akyworld.pythonanywhere.com/decode',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                var s = response.decoded_data.split(",");
+                if (s[0].toString() == "BookingId") {
+                    $('#result').text('Booking id : ' + s[1]);
+                    fetch_detail(s[1]);
+                }
+                else { 
+                    $('#result').text('QR code invalid');
+                }
+            },
+            error: function (error) {
+                $('#result').text('Error: ' + error.responseJSON.error);
+            }
+        });
+    }
+
+    function fetch_detail(id) { 
+        $.ajax({
+            url: '/CB/Conform',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+                if (response["error"] == "Success") {
+                    $("#gameName").text(response["Game_name"]);
+                    $("#memberName").text(response["Member_name"]);
+                    $("#slotDate").text(response["Date"]);
+                    $("#slotTime").text(response["Starting_time"]);
+                    $("#totalAmount").text(response["total_amount"]);
+                    $("#Players").text(response["Players"]);
+                }
+                else if (response["error"] == "Manager") {
+                    $('#result').text("you are no allow to conform this booking "+response["username"]);
+                }
+                else if (response["error"] == "Update") {
+                    $('#result').text('error in conform booking');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error sending email:', error);
+            }
+        });
+    }
+</script>

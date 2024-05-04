@@ -1,0 +1,228 @@
+﻿
+@{
+    ViewData["Title"] = "MemberHome";
+    Layout = "MemberLayout";
+}
+
+<div class="slider">
+    <img src="~/Assets/Photo/football game 1.jpg" alt="Slide 1" class="slide" />
+    <img src="~/Assets/Photo/image 1.jpg" alt="Slide 2" class="slide" />
+    <img src="~/Assets/Photo/image 2.jpg" alt="Slide 4" class="slide" />
+    <img src="~/Assets/Photo/image 3.jpg" alt="Slide 5" class="slide" />
+</div>
+
+<div class="text-center">
+    <div class="welcomeTxt">Welcome, Guest</div>
+    <div class="club-Details-area">
+        <div class="club-Detail">
+            <div class="c-d-populer">Most Populer #1</div>
+            <div class="c-d-clubName">Box criket</div>
+            <div class="c-d-des">Club description</div>
+            <button class="c-d-checkBtn">Explore now</button>
+        </div>
+        <div class="club-Detail">
+            <div class="c-d-populer">Most Populer #2</div>
+            <div class="c-d-clubName">Basketball</div>
+            <div class="c-d-des">Club description</div>
+            <button class="c-d-checkBtn">Explore now</button>
+        </div>
+        <div class="club-Detail">
+            <div class="c-d-populer">Most Populer #3</div>
+            <div class="c-d-clubName">Football</div>
+            <div class="c-d-des">Club description</div>
+            <button class="c-d-checkBtn">Explore now</button>
+        </div>
+        <div class="club-Detail">
+            <div class="c-d-populer">Most Populer #4</div>
+            <div class="c-d-clubName">Football</div>
+            <div class="c-d-des">Club description</div>
+            <button class="c-d-checkBtn">Explore now</button>
+        </div>
+        <div class="club-Detail">
+            <div class="c-d-populer">Most Populer #5</div>
+            <div class="c-d-clubName">Football</div>
+            <div class="c-d-des">Club description</div>
+            <button class="c-d-checkBtn">Explore now</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="plusDiv">
+                <div class="plusDiv-left">10+</div>
+                <div class="plusDiv-right">
+                    <div class="plusDiv-right-up">We have more then 10 club </div>
+                    <div class="plusDiv-right-down">This main body containe the basic information abount for club for marketing you know and i dont know what i tell you but it was a fun to write anything on this area</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="plusDiv">
+                <div class="plusDiv-left">20+</div>
+                <div class="plusDiv-right">
+                    <div class="plusDiv-right-up">Play More then 20 games</div>
+                    <div class="plusDiv-right-down">This main body containe the basic information abount for club for marketing you know and i dont know what i tell you but it was a fun to write anything on this area</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="plusDiv">
+                <div class="plusDiv-left">10+</div>
+                <div class="plusDiv-right">
+                    <div class="plusDiv-right-up">More then 100 customer</div>
+                    <div class="plusDiv-right-down">This main body containe the basic information abount for club for marketing you know and i dont know what i tell you but it was a fun to write anything on this area</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center mb-4">
+                <h2 class="h2Title1">Top Club</h2>
+            </div>
+            <div class="row" id="TopClub">
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding" id="section_3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center mb-4">
+                <h2 class="h2Title1">Top Games</h2>
+            </div>
+            <div class="row" id="TopGame">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section-padding" id="section_3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center mb-4">
+                <h2 class="h2Title2">Offers Games</h2>
+            </div>
+            <div class="row" id="OfferGame">
+            </div>
+        </div>
+    </div>
+</section>
+
+@* Top Clubs 
+<div>
+    <button onclick="window.location.href=''">Club</button>
+    <div>
+        <div id=
+            
+            "TopClub"></div>
+    </div>
+</div>
+
+@* Top Games 
+<div>
+    <button onclick="window.location.href=''">Game</button>
+    <div>
+        <div id="TopGame"></div>
+    </div>
+</div>
+
+@* Top Offers Games 
+<div>
+    <button onclick="window.location.href=''">More Games</button>
+    <div>
+        <div id="OfferGame"></div>
+    </div>
+</div>
+*@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        topGames();
+        topClubs();
+        OfferdGame();
+    });
+
+    function topGames() { 
+        $.ajax({
+            url: '/Member/fetch_topGame',
+            type: 'POST',
+            success: function (response) {
+                $("#TopGame").html(response);
+            }
+        });
+    }
+
+    function topClubs() { 
+        $.ajax({
+            url: '/Member/fetch_topClub',
+            type: 'POST',
+            success: function (response) {
+                $("#TopClub").html(response);
+            }
+        });
+    }
+
+    function OfferdGame(){
+        $.ajax({
+            url: '/Member/fetch_offerGame',
+            type: 'POST',
+            success: function (response) {
+                $("#OfferGame").html(response);
+            }
+        });
+    }
+
+    function TodayBookings(){
+        $.ajax({
+            url: '/Member/fetch_todayBooking',
+            type: 'POST',
+            success: function (response) {
+                $("#TodayBooking").html(response);
+            }
+        });
+    }
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const details = document.querySelectorAll('.club-Detail');
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(function (slide) {
+                slide.style.opacity = 0;
+            });
+
+            details.forEach(function (slide) {
+                slide.style.opacity = 0;
+            });
+
+            // Show the current slide
+            slides[index].style.opacity = 1
+            details[index].style.opacity = 1;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Initially show the first slide
+        showSlide(currentSlide);
+
+        // Automatically transition to the next slide every 3 seconds
+        setInterval(nextSlide, 5000);
+    });
+
+</script>

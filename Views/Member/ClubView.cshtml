@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "ClubView";
+    Layout = "MemberLayout";
+}
+
+@section styles {
+    <style>
+    </style>
+    <link rel="stylesheet" href="~/css/NewCSS/slotSchedule.css" />
+}
+
+<section class="section-padding section-bg" id="section_2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                <!-- <img src="ProPhotos/Games Slide/Box cricket 1.jpg" class="custom-text-box-image img-fluid" alt=""> -->
+                <div class="gameImg-block">
+                    <img src="/Assets/Club/@ViewBag.image" id="ClubImage" class="gameImg-image" alt="Game image">
+                    <div class="gameImg-caption">
+                        <!-- <a href="" class="category-block-link"> -->
+                        Club image
+                        <!-- </a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="custom-text-box">
+                    <h2 id="ClubName" class="gameTitle">@ViewBag.name</h2>
+                    <div class="rating" id="ClubRating">Rating : @ViewBag.rating / 5</div>
+                    <!-- 
+
+                    <h5 class="clubTitle">Club: woop</h5> 
+                    <p class="gameDetails">Total games: 5</p>
+                    -->
+                    <p class="gameDetails" id="ClubManager">@ViewBag.manager</p>
+                    <p class="gameDetails" id="ClubAddress"> <i class="ri-map-pin-fill gameDetails-icon2"></i>@ViewBag.addr </p>
+                    <p class="gameDetails" id="ClubArea"> @ViewBag.area</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-12 text-center mb-4">
+                <h2 class="h2Title1">Games</h2>
+            </div>
+            <div class="row" id="Games">
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+
+<div>
+    <img src="/Assets/Club/@ViewBag.image" id="ClubImage" style="width:250px; height:100px;"></img>
+    <div>
+        <div id="ClubName">@ViewBag.name</div>
+        <div id="ClubAddress">@ViewBag.addr</div>
+        <div id="ClubRating">@ViewBag.rating</div>
+        <div id="ClubManager">@ViewBag.manager</div>
+        <div id="ClubArea">@ViewBag.area</div>
+    </div>
+</div>
+
+
+-->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        fetch_Games();
+    });
+
+    function fetch_Games() {
+        $.ajax({
+            url: '/Game/fetchGamesUser/'+@ViewBag.Id,
+            type: 'POST',
+            success: function (response) {
+                $("#Games").html(response);
+            }
+        });
+    }
+</script>

@@ -1,0 +1,735 @@
+﻿
+@{
+    ViewData["Title"] = "TopClub";
+    Layout = "MemberLayout";
+}
+
+@section styles {
+    <style>
+        .h2Title1 {
+            color: white;
+            font-size: var(--h2-font-size);
+            letter-spacing: -2px;
+            border-radius: 25px;
+            background-color: #25014970;
+            padding: 12px;
+            /* content: url(ProPhotos/games\ Bg.jpg); */
+            background: url(../ProPhotos/gameBg.png);
+            background-repeat: no-repeat, repeat;
+            background-size: cover;
+        }
+
+        .h2Title2 {
+            color: white;
+            font-size: var(--h2-font-size);
+            letter-spacing: -2px;
+            border-radius: 25px;
+            background-color: #25014970;
+            padding: 12px;
+            /* content: url(ProPhotos/games\ Bg.jpg); */
+            background: url(../ProPhotos/offerBg.png);
+            background-repeat: no-repeat, repeat;
+            background-size: cover;
+        }
+
+        .gamesDetails {
+            color: #e5e5e5;
+            font-size: var(--p-font-size);
+            font-weight: var(--font-weight-light)
+        }
+
+        .section-padding {
+            /* padding-top: 100px; */
+            padding-bottom: 100px
+        }
+
+        .custom-block-wrap {
+            background: #00b6ff4d;
+            border-radius: var(--border-radius-medium);
+            position: relative;
+            overflow: hidden;
+            transition: all .5s;
+            backdrop-filter: blur(33px);
+        }
+
+            .custom-block-wrap:hover {
+                box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175)
+            }
+
+        .custom-block-body {
+            padding: 30px
+        }
+
+        .custom-block-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 235px;
+            max-height: 235px;
+        }
+
+        .custom-block .custom-btn-book {
+            border-radius: 0;
+            display: block
+        }
+
+        .progress {
+            background: white;
+            height: 5px
+        }
+
+        .progress-bar {
+            background: #d212dd
+        }
+
+        .gamesTitle {
+            color: #1ac931;
+            font-size: var(--h5-font-size)
+        }
+
+        .custom-btn-book {
+            background: #089d4c;
+            border: 2px solid transparent;
+            border-radius: var(--border-radius-large);
+            color: white;
+            font-size: var(--btn-font-size);
+            font-weight: var(--font-weight-normal);
+            line-height: normal;
+            padding: 15px 25px;
+            text-align: center;
+            width: 100%;
+        }
+
+            .custom-btn-book:hover {
+                background: #077338;
+                color: white;
+            }
+
+        .custom-text-block {
+            padding: 60px 40px
+        }
+
+        .donate-section {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            position: relative;
+            padding-top: 150px;
+            padding-bottom: 150px
+        }
+
+        .rating {
+            color: #fff900;
+            font-size: 30px;
+        }
+
+        .search-div {
+        }
+
+        .section-search-btn {
+            display: inline-flex;
+            padding: 1px 26px;
+            border: 1px solid transparent;
+            margin: 37px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            width: 50%;
+            background: #ffffff;
+            color: #0000007a;
+        }
+
+        .section-icon {
+            font-size: 33px;
+        }
+
+        .section-search-text {
+            margin-top: 13px;
+            margin-left: 17px;
+        }
+
+        .custom-block-over {
+            position: relative;
+            /* overflow: hidden; */
+        }
+
+        .custom-block-wrap-offer {
+            background-image: url("../ProPhotos/Backgrounds/offerBlastBg 2.png");
+            width: 229px;
+            height: 60px;
+            position: absolute;
+            top: 11px;
+            right: -72px;
+            /* left: 0; */
+            /* bottom: 0; */
+            border: 0;
+            font-size: 25px;
+            color: white;
+            background-repeat: no-repeat, repeat;
+            background-size: cover;
+            /* margin: -28px; */
+            z-index: 8;
+            text-align: center;
+            padding-top: 10px;
+            font-weight: 900;
+            rotate: 45deg;
+        }
+
+
+
+        .section-manageGameMain {
+            padding-top: 50px;
+            padding-bottom: 50px
+        }
+
+        .manageGameMain-Div {
+            background: #0091b357;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%);
+        }
+
+        .manageGameMain-head {
+            display: flex;
+        }
+
+        .manageGameMain-title {
+            color: wheat;
+            font-size: 57px;
+            font-weight: 700;
+            background: linear-gradient(to right, #0098ff, #00ff09 49%);
+            -webkit-text-fill-color: #cdcdcd;
+            -webkit-background-clip: text;
+        }
+
+        .manageGameMain-head-right {
+            text-align: right;
+            /* margin: auto; */
+            margin: 23px;
+        }
+
+        .manageGameMain-club-btn {
+            color: #ffffffa8;
+            background: #0083b7c4;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            border: 0;
+            padding: 6px 35px;
+            box-shadow: 0 0 12px 0px rgb(35 35 35 / 60%);
+            margin-right: 7px;
+            border: 1px solid transparent
+        }
+
+            .manageGameMain-club-btn:hover {
+                color: white;
+                background: #0083b7;
+                border: 1px solid white;
+                box-shadow: 0px 0px 20px 2px rgb(39 39 39);
+            }
+
+        .manageGameMain-addGame-btn {
+            color: #ffffffa8;
+            background: #0083b7c4;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            border: 0;
+            padding: 6px 35px;
+            box-shadow: 0 0 12px 0px rgb(35 35 35 / 60%);
+            border: 1px solid transparent;
+        }
+
+            .manageGameMain-addGame-btn:hover {
+                color: white;
+                background: #0083b7;
+                box-shadow: 0px 0px 20px 2px rgb(39 39 39);
+                border: 1px solid white;
+            }
+
+        .manageGameMain-table-div {
+            background: #238eaf36;
+            border-radius: 10px;
+            /* padding: 23px; */
+            /* box-shadow: inset 0px 0px 20px 0px rgb(0 0 0 / 64%); */
+            overflow: hidden;
+            position: relative;
+            color: white;
+            text-align: center;
+            border: 1px solid #00c1cf8f;
+        }
+
+        .manageGameMain-table-tr-update-btn {
+            color: #ffffffba;
+            background: #00ff3945;
+            font-size: 15px;
+            /* font-weight: 600; */
+            border-radius: 10px;
+            border: 1px solid transparent;
+            padding: 5px 18px;
+            margin-right: 5px;
+        }
+
+            .manageGameMain-table-tr-update-btn:hover {
+                color: white;
+                background: #00ff3991;
+                border: 1px solid white;
+            }
+
+        .manageGameMain-table-tr-deactive-btn {
+            color: #ffffffba;
+            background: #5896a582;
+            font-size: 15px;
+            /* font-weight: 600; */
+            border-radius: 10px;
+            border: 1px solid transparent;
+            padding: 5px 18px;
+            margin-right: 5px;
+        }
+
+            .manageGameMain-table-tr-deactive-btn:hover {
+                color: white;
+                background: #38bad9c2;
+                border: 1px solid white;
+            }
+
+        .manageGameMain-table-tr-active-btn {
+            color: #ffffffba;
+            background: #b54a4a;
+            font-size: 15px;
+            /* font-weight: 600; */
+            border-radius: 10px;
+            border: 1px solid transparent;
+            padding: 5px 18px;
+            margin-right: 5px;
+        }
+
+            .manageGameMain-table-tr-active-btn:hover {
+                color: white;
+                background: #ab2d2d;
+                border: 1px solid white;
+            }
+
+        .manageGameMain-table-data-divider {
+            height: 1px;
+            /* width: 100%; */
+            background: #ffffff4f;
+            margin: 8px 15px;
+        }
+
+        .hideeX {
+            display: none;
+        }
+
+        .Admin-table {
+            width: 100%;
+        }
+
+        .Admin-t-th {
+            background: #00c1cf8f;
+            padding: 5px;
+        }
+
+        .Admin-t-tr {
+            border-bottom: 1px solid #ffffff5e;
+        }
+
+        .Admin-t-td {
+            padding: 5px;
+        }
+
+        .filtering-div {
+            margin-bottom: 16px;
+        }
+
+        .filtering-search-div {
+            text-align: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .filtering-search {
+            padding: 8px;
+            border: 0;
+            border-radius: 28px;
+            background: #00c1cf5c;
+            color: white;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .search-icon {
+            color: white;
+            /* align-items: center; */
+            font-size: 26px;
+            margin-right: 7px;
+        }
+
+        .filtering-col-div {
+            display: flex;
+        }
+
+        .filtering-title {
+            color: white;
+            width: 29%;
+        }
+
+        .filtering-select-div {
+            width: 60%;
+        }
+
+        .filtering-select {
+        }
+
+        .filtering-option {
+        }
+
+        .manageGameMain-table-div {
+        }
+
+        .manageGameMain-div-leftC {
+            padding: 25px;
+        }
+
+        .m-d-lc-img {
+            max-width: 85%;
+            /* margin-bottom: 10px; */
+            margin: 0px;
+        }
+
+        .m-d-lc-img-btn {
+            background: #ffffffb8;
+            border: 0;
+            padding: 7px 30px 7px 30px;
+            backdrop-filter: blur(48px);
+            font-weight: 600;
+            margin: 10px;
+        }
+
+        .manageGameMain-div-rightC {
+            padding: 25px;
+        }
+
+        .m-d-rc-input-div {
+            display: table;
+        }
+
+        .m-d-rc-button {
+            background: #ffffffb8;
+            border: 0;
+            padding: 7px 30px 7px 30px;
+            backdrop-filter: blur(48px);
+            font-weight: 600;
+            margin: 10px;
+        }
+
+        .section-search-input {
+            background: #eaf5ff00;
+            color: #3b3b3b;
+            border: 0;
+            border-bottom: 1px solid;
+            height: 65%;
+            font-size: 20px;
+        }
+
+            .section-search-input:focus {
+                outline: none;
+            }
+
+        .topClub-filter {
+            text-align: center;
+            color: white;
+        }
+
+        .topClub-filter-div {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .topClub-filter-div-f {
+            background: #1f85ad;
+            padding: 6px 23px;
+            border-radius: 31px;
+        }
+
+        .topClub-filter-div-checkbox {
+            width: 26px;
+            height: 19px;
+        }
+
+        .topClub-filter-div-select {
+            background: none;
+            color: white;
+            border: 0;
+        }
+
+        .topClub-filter-div-Apply {
+            background: #1cd13d85;
+            border: 1px solid white;
+            color: white;
+            border-radius: 33px;
+            padding: 5px 23px;
+            margin-left: 10px;
+        }
+
+            .topClub-filter-div-Apply:hover {
+                background: #1b852e;
+            }
+    </style>
+}
+@*
+<div class="topClub">
+    <label> Enter Search for Club</label>
+    <input type="text" id="search" onkeyup="fetch_Club()" />
+</div>
+
+<div class="topClub">
+    Search On Loaction:<br>
+    <input type="checkbox" id="checkState"/>
+    <label>selec state : </label>
+    <label id="stateerror"></label>
+    <select id="state" onchange="fcity()"></select>
+    <br>
+
+    <input type="checkbox" id="checkCity" />
+    <label>select city : </label>
+    <label id="cityerror"></label>
+    <select id="city" onchange="farea()"></select>
+    <br>
+
+    <input type="checkbox" id="checkArea" />
+    <label>select area : </label>
+    <label id="areaerror"></label>
+    <select id="area"></select>
+    <br>
+
+    <br>
+    <input type="checkbox" id="checkGames" />
+    Search By Games
+    <select id="Games"></select>
+    <br>
+    <button onclick="fetch_Club()">Apply</button>
+</div>
+
+
+
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Top Club
+                    </div>
+                </div>
+            </div>
+            <div class="filtering-div">
+                <div class="row">
+                    <div class="manageGameMain-table-div">
+                        <div class="">
+                            <table class="Admin-table" id="TopClub">
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+*@
+
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Top Club
+                    </div>
+                </div>
+            </div>
+            <div class="filtering-div">
+                <section class="container section-search">
+                    <div class="row">
+                        <div class="col-lg-12 search-div">
+                            <div class="section-search-btn">
+                                <i class="ri-search-line section-icon"></i>
+                                <div class="section-search-text">
+                                    <input type="text" placeholder="Enter Search for Club" id="search" class="section-search-input" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="topClub-filter">
+                    <div class="topClub-filter-div">
+                        <div class="topClub-filter-div-title">
+                            Filters
+                        </div>
+                        <input type="checkbox" id="checkState" class="topClub-filter-div-checkbox" />
+                        <div class="topClub-filter-div-f">
+                            <label>State : </label>
+                            <label id="stateerror"></label>
+                            <select class="topClub-filter-div-select" id="state" onchange="fcity()"></select>
+                        </div>
+
+                        <input type="checkbox" id="checkCity" class="topClub-filter-div-checkbox" />
+                        <div class="topClub-filter-div-f">
+                            <label>select city : </label>
+                            <label id="cityerror"></label>
+                            <select class="topClub-filter-div-select" id="city" onchange="farea()"></select>
+                        </div>
+
+                        <input type="checkbox" id="checkArea" class="topClub-filter-div-checkbox" />
+                        <div class="topClub-filter-div-f">
+                            <label>select area : </label>
+                            <label id="areaerror"></label>
+                            <select class="topClub-filter-div-select" id="area"></select>
+                        </div>
+
+                        <input type="checkbox" id="checkGames" class="topClub-filter-div-checkbox" />
+                        <div class="topClub-filter-div-f">
+                            <label>Search By Games</label>
+                            <select class="topClub-filter-div-select" id="Games"></select>
+                        </div>
+                        <button onclick="fetch_Club()" class="topClub-filter-div-Apply">Apply</button>
+                    </div>
+                </div>
+            </div>
+            <div class="manageGameMain-table-div" style="padding: 13px;">
+                <div class="row" id="TopClub">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+                        <!--
+
+<div>
+    <table id="TopClub">
+        
+    </table>
+</div>
+-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        fState();
+        $("#state").val($("#state option:first").val());
+        fcity();
+        $("#city").val($("#city option:first").val());
+        farea();
+        $("#area").val($("#area option:first").val());
+        fGames();
+        fetch_Club();
+    });
+
+    function fState() {
+        $.ajax({
+            url: '/DropDown/State',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#state").html(response);
+            }
+        });
+    }
+
+    function fGames() {
+        $.ajax({
+            url: '/DropDown/AllGames',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#Games").html(response);
+            }
+        });
+    }
+
+    function fcity() {
+        var id = $("#state").val();
+        $.ajax({
+            url: '/DropDown/City',
+            type: 'POST',
+            async: false,
+            data: { state: id },
+            success: function (response) {
+                console.log(response);
+                $("#city").html(response);
+            }
+        });
+    }
+
+    function farea() {
+        var id = $("#city").val();
+        $.ajax({
+            url: '/DropDown/Area',
+            type: 'POST',
+            async: false,
+            data: { city: id },
+            success: function (response) {
+                console.log(response);
+                $("#area").html(response);
+            }
+        });
+    }
+
+    function fetch_Club(){
+        var text = $("#search").val();
+
+        var sc = $("#checkState").prop('checked');
+        var cc = $("#checkCity").prop('checked');
+        var ac = $("#checkArea").prop('checked');
+        var gc = $("#checkGames").prop('checked');
+
+        if (text == "") {
+            text = "0";
+        }
+
+        if (sc) {
+            var s = $("#state").val();
+        } else {
+            var s = 0;
+        }
+
+        if (cc) {
+            var c = $("#city").val();
+        } else {
+            var c = 0;
+        }
+
+        if (ac) {
+            var a = $("#area").val();
+        } else {
+            var a = 0;
+        }
+
+        if (gc) {
+            var g = $("#Games").val().toString();
+        } else {
+            var g = "0";
+        }
+
+        console.log(s,c,a,g);
+        $.ajax({
+            url: '/Club/fetchAllClubDetails',
+            type: 'POST',
+            data: { s: s, c: c, a: a, g: g , search:text},
+            success: function (response) {
+                $("#TopClub").html(response);
+                console.log(response);
+            }
+        });
+    }
+
+    
+
+</script>

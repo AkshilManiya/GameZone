@@ -1,0 +1,574 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "AdminLayout";
+}
+
+
+@section styles {
+    <style>
+        .section-padding {
+            padding-top: 50px;
+            padding-bottom: 50px
+        }
+
+        .section-bg {
+            /* background-color: rgb(0, 0, 0) */
+        }
+
+        .mybooking-Div {
+            background: #0080b357;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%);
+            backdrop-filter: blur(19px);
+        }
+
+        .mybooking-title {
+            color: white;
+            font-size: 57px;
+            font-weight: 700;
+            /* background: linear-gradient(to right, red, yellow 49%); */
+            /* -webkit-text-fill-color: #ff31f969; */
+            -webkit-background-clip: text;
+        }
+
+        .mybooking-set-div {
+            background: #6a23af;
+            border-radius: 10px;
+            padding: 23px;
+            box-shadow: inset 0px 0px 20px 0px rgb(0 0 0 / 64%);
+        }
+
+        .mybooking-set-items-btn {
+            display: flex;
+            background: #d520ff9c;
+            /* margin: 0px; */
+            padding: 9px;
+            border-radius: 10px;
+            color: white;
+            border: 0px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .mybooking-set-items-btn:hover {
+            background: #cf00ff;
+        }
+
+        .mybooking-item-num {
+            font-size: 40px;
+            width: 5%;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .mybooking-item-division {
+            width: 2px;
+            color: white;
+            background: white;
+            margin: 4px;
+            height: 51px;
+        }
+
+        .mybooking-item-info {
+            width: 60%;
+            text-align: left;
+            padding-left: 14px;
+        }
+
+        .mybooking-item-info-up {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .mybooking-item-info-up-l {
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .mybooking-item-info-up-r {
+            color: #fbb3ff;
+            padding-left: 9px;
+            font-size: 23px;
+        }
+
+        .mybooking-item-info-down {
+            color: #fbb3ff;
+        }
+
+
+        .mybooking-item-rating-btn {
+            width: 19%;
+            text-align: center;
+            font-size: 39px;
+            color: #ffe200;
+        }
+
+        .mybooking-item-status {
+            width: 12%;
+            font-size: 23px;
+            display: flex;
+            text-align: left;
+            padding: 12px;
+        }
+
+        .status-icon {
+            padding-left: 4px;
+            font-weight: 800;
+            font-size: 25px;
+        }
+
+        .slotConfirm-main {
+            display: none;
+            position: fixed;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .slotConfirm-div {
+            border-radius: 10px;
+            background: linear-gradient(to bottom right, #00bfad87, #009fb97a);
+            box-shadow: 0 0 20px 1px rgb(0 0 0);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: 0 10;
+        }
+
+        .slotConfirm-main-open {
+            display: block;
+        }
+
+        .slotConfirm-title {
+            text-align: left;
+            font-size: 246%;
+            font-weight: bold;
+            /* padding: 28px; */
+            background: linear-gradient(to right, #00ff95, cyan);
+            -webkit-text-fill-color: #91d2ff69;
+            -webkit-background-clip: text;
+        }
+
+        .slotConfirm-left {
+            text-align: left;
+            background: #00daff4f;
+            border-radius: 10px;
+            padding: 8px 24px 24px 24px;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slotConfirm-gamename {
+            font-size: 45px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .slotConfirm-club {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .slotConfirm-location {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .slotConfirm-time {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-persons {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-amount {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-cancel-div {
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            /* top: 0; */
+            padding: 16px;
+        }
+
+        .slotConfirm-cancel-btn {
+            padding: 5px 18px;
+            color: #ffffffa1;
+            background: #ab2f2f;
+            font-size: 16px;
+            border: 1px solid;
+            border-radius: 8px;
+            height: 33px;
+            margin-left: 30px;
+        }
+
+        .slotConfirm-cancel-btn:hover {
+            color: white;
+            background: #000000;
+        }
+
+        .slotConfirm-Download-btn {
+            padding: 5px 18px;
+            color: #ffffffa1;
+            background: #0e7d1b;
+            font-size: 16px;
+            border: 1px solid;
+            border-radius: 8px;
+            height: 33px;
+            margin-left: 30px;
+        }
+
+        .slotConfirm-Download-btn:hover {
+            color: white;
+            background: #000000;
+        }
+
+        .slotConfirm-rating-btn {
+            padding: 5px 86px;
+            color: #ffffffa1;
+            background: #ab2f2ff0;
+            font-size: 22px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        .slotConfirm-rating-btn:hover {
+            color: white;
+            background: #af0000;
+        }
+
+        .slotConfirm-right {
+            background: #00daff4f;
+            border-radius: 10px;
+            padding: 8px 24px 24px 24px;
+            text-align: center;
+        }
+
+        .slotConfirm-right-slot-id {}
+
+        .slotConfirm-right-qr-code {
+            width: 100%;
+            height: 346px;
+            background: white;
+        }
+
+        .slotConfirm-right-qr-code-img {
+            width: 100%;
+            height: auto;
+            float: left;
+            max-width: 100%;
+        }
+
+        .info-icons {
+            padding-right: 10px;
+        }
+
+        .blur2 {
+            filter: blur(4px);
+        }
+
+        .rating-main {
+            display: none;
+            position: fixed;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .rating-div {
+            border-radius: 10px;
+            /* background: linear-gradient(to bottom right, #ab00bf, #8300b9); */
+            box-shadow: 0 0 20px 1px rgb(0 0 0 / 33%);
+            color: white;
+            /* padding: 20px; */
+            text-align: center;
+            margin: 0 10;
+        }
+
+        .rating-div-give-btnSet {}
+
+        .rating-div-btnSet-btn {
+            background: transparent;
+            border: 0;
+            color: white;
+            font-size: 100px;
+        }
+
+        .rating-div-des {}
+
+        .rating-des-text {
+            color: white;
+        }
+
+        .rating-Open {
+            display: block;
+        }
+
+        .r-hide {
+            display: none;
+        }
+
+        .r-show {
+            display: block;
+        }
+
+        .Details-set {}
+
+        .Details-set-A {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .Details-set-A-in {
+            background: #00daff4a;
+            text-align: center;
+            color: white;
+            padding: 16px;
+        }
+
+        .Details-set-A-in-title {
+            color: #7ffeffc9;
+            font-size: 22px;
+        }
+
+        .Details-set-A-in-text {
+            font-size: 33px;
+        }
+
+        .Details-set-B {
+            border-radius: 10px;
+        overflow: hidden;
+        /* background: aliceblue; */
+        background: #00e5ff26;
+        text-align: center;
+        color: white;
+        padding: 16px;
+        margin-top: 13px;
+        }
+
+        .Details-set-B-title {    font-size: 35px;}
+
+        .Details-set-B-set {    /* background: #00657d; */
+        border-radius: 10px;
+        overflow: hidden;
+        /* background: aliceblue; */
+        background: #00daff4a;
+        text-align: center;
+        color: white;
+        padding: 16px;
+        margin-top: 13px;}
+
+        .Details-set-B-search-div {}
+
+        .Details-set-B-datePick {    padding: 7px 27px;
+        border: 0;
+        border-radius: 5px;}
+
+        .Details-set-B-select {    padding: 7px 27px;
+        border: 0;
+        border-radius: 5px;}
+
+        .Details-set-B-refresh-btn {    padding: 4px 27px;
+        border: 1px solid white;
+        border-radius: 37px;
+        background: #088948;
+        color: white;}
+
+        .Details-set-B-details {}
+
+        .Details-set-B-iece {}
+
+        .Details-set-B-in {}
+
+        .Details-set-B-in-img {
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+        }
+     </style>
+}
+<!--
+
+<h1>Dashboard</h1>
+
+
+<div>
+    <div>total Earnings</div><div id="earning"></div>
+    <div>Total Members </div><div id="today"></div>
+    <div>Total Clubs </div><div id="clubs"></div>
+    <div>Total Games </div><div id="games"></div>
+</div>
+
+ // charts
+<div>
+    // search
+    <div>
+        <input type="date" id="datePicker" placeholder="Select Date">
+        <select id="SelectClub"></select>
+        <button onclick="searchClubs()">Find</button>
+    </div>
+
+    // chart
+    <div>
+        <div>total earning : </div><div id="total_earning"></div>
+        <div>total booking : </div><div id="total_booking"></div>
+        <img src="" alt="Pie Chart" id="PieChart1">
+    </div>
+
+    <div>
+        <div>total earning : </div><div id="total_earning_today"></div>
+        <div>total booking : </div><div id="total_booking_today"></div>
+        <img src="" alt="Pie Chart" id="PieChart1_today">
+    </div>
+</div>
+
+-->
+    <section class="section-padding section-bg" id="myBookings">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-12 mb-5 mb-lg-0">
+                    <div class="mybooking-Div">
+                        <div class="mybooking-title">
+                            Dashboard
+                        </div>
+                        <div class="Details-set">
+                            <div class="row Details-set-A">
+                                <div class="col-lg-6 Details-set-A-in">
+                                    <div class="Details-set-A-in-title">Total Earnings</div>
+                                    <div class="Details-set-A-in-text" id="earning">0</div>
+                                </div>
+                                <div class="col-lg-6 Details-set-A-in">
+                                    <div class="Details-set-A-in-title">Total Members </div>
+                                    <div class="Details-set-A-in-text" id="today">0</div>
+                                </div>
+                                <div class="col-lg-6 Details-set-A-in">
+                                    <div class="Details-set-A-in-title">Total Clubs </div>
+                                    <div class="Details-set-A-in-text" id="clubs">0</div>
+                                </div>
+                                <div class="col-lg-6 Details-set-A-in">
+                                    <div class="Details-set-A-in-title">Total Games </div>
+                                    <div class="Details-set-A-in-text" id="games">0</div>
+                                </div>
+                            </div>
+                            <div class="Details-set-B">
+                                <div class="Details-set-B-title">
+                                    Analytical
+                                </div>
+                                <div class="Details-set-B-set">
+                                    <div class="Details-set-B-search-div">
+                                        <input class="Details-set-B-datePick" type="date" id="datePicker" placeholder="Select Date">
+                                        <select class="Details-set-B-select" id="SelectClub"></select>
+                                        <button class="Details-set-B-refresh-btn" onclick="searchClubs()">Search</button>
+                                    </div>
+                                    <div class=" row Details-set-B-details">
+                                        <div class="col-lg-6 Details-set-B-iece">
+                                            <div class="Details-set-B-in">
+                                                <div class="Details-set-A-in-title">Total Earning : </div>
+                                                <div class="Details-set-A-in-text" id="total_earning">0</div>
+                                            </div>
+                                            <div class="Details-set-B-in">
+                                                <div class="Details-set-A-in-title">Total Booking : </div>
+                                                <div class="Details-set-A-in-text" id="total_booking">0</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 Details-set-B-in">
+                                            <img src="" class="Details-set-B-in-img" alt="Pie Chart" id="PieChart1">
+                                        </div>
+                                    </div>
+                                    <div class=" row Details-set-B-details">
+                                        <div class="col-lg-6 Details-set-B-in">
+                                            <img src="" class="Details-set-B-in-img" alt="Pie Chart" id="PieChart1_today">
+                                        </div>
+                                        <div class="col-lg-6 Details-set-B-iece">
+                                            <div class="Details-set-B-in">
+                                                <div class="Details-set-A-in-title">Total Earning : </div>
+                                                <div class="Details-set-A-in-text" id="total_earning_today">0</div>
+                                            </div>
+                                            <div class="Details-set-B-in">
+                                                <div class="Details-set-A-in-title">Total Booking : </div>
+                                                <div class="Details-set-A-in-text" id="total_booking_today">0</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        fclub();
+        $("#SelectClub").val($("#SelectClub option:first").val());
+        allTimeDetails();
+    });
+
+    function fclub() {
+        $.ajax({
+            url: '/DropDown/Club',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#SelectClub").html(response);
+            }
+        });
+    }
+
+    function searchClubs() {
+        var date = $("#datePicker").val().toString();
+        var club = $("#SelectClub").val();
+        $.ajax({
+            url: '/Dash/AdminShow',
+            type: 'POST',
+            data: {date:date, club:club},
+            success: function (response) {
+                $("#PieChart1").attr("src", response['imgUrl']);
+                $("#total_earning").text(response['booking_amount']);
+                $("#total_booking").text(response['total_booking']);
+
+                $("#PieChart1_today").attr("src", response['imgUrl_today']);
+                $("#total_earning_today").text(response['booking_amount_today']);
+                $("#total_booking_today").text(response['total_booking_today']);
+                console.log(response['imgUrl_today']);
+            }
+        });
+    }
+
+    function allTimeDetails() {
+        $.ajax({
+            url: '/Dash/allTimeDetailsShow',
+            type: 'POST',
+            success: function (response) {
+                $("#earning").text(response['Earning']);
+                $("#today").text(response['Members']);
+                $("#clubs").text(response['Clubs']);
+                $("#games").text(response['Games']);
+            }
+        });
+    }
+
+</script>

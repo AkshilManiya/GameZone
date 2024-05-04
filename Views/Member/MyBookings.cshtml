@@ -1,0 +1,355 @@
+﻿
+@{
+    ViewData["Title"] = "MyBookings";
+    Layout = "MemberLayout";
+}
+@section styles {
+    <style>
+        .bookings {
+            color: white;
+        }
+
+        .section-padding {
+            padding-top: 50px;
+            padding-bottom: 50px
+        }
+
+        .section-bg {
+            /* background-color: rgb(0, 0, 0) */
+        }
+
+        .mybooking-Div {
+            background: #0078b357;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 41%);
+        }
+
+        .mybooking-title {
+            color: wheat;
+            font-size: 57px;
+            font-weight: 700;
+            background: linear-gradient(to right, red, yellow 49%);
+            -webkit-text-fill-color: #ff31f969;
+            -webkit-background-clip: text;
+        }
+
+        .mybooking-set-div {
+            background: #238eaf91;
+            border-radius: 10px;
+            padding: 23px;
+            box-shadow: inset 0px 0px 20px 0px rgb(0 0 0 / 64%);
+        }
+
+        .mybooking-set-items-btn {
+            display: flex;
+            background: #3abfdf9c;
+            /* margin: 0px; */
+            padding: 9px;
+            border-radius: 10px;
+            color: white;
+            border: 0px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+            .mybooking-set-items-btn:hover {
+                background: #000000f0;
+            }
+
+        .mybooking-item-num {
+            font-size: 40px;
+            width: 5%;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .mybooking-item-division {
+            width: 2px;
+            color: white;
+            background: white;
+            margin: 4px;
+            height: 51px;
+        }
+
+        .mybooking-item-info {
+            width: 60%;
+            text-align: left;
+            padding-left: 14px;
+        }
+
+        .mybooking-item-info-up {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .mybooking-item-info-up-l {
+            font-size: 23px;
+            font-weight: 700;
+        }
+
+        .mybooking-item-info-up-r {
+            color: #b3e6ff;
+            padding-left: 9px;
+            font-size: 23px;
+        }
+
+        .mybooking-item-info-down {
+            color: #b3edff;
+        }
+
+
+        .mybooking-item-rating-btn {
+            width: 19%;
+            text-align: center;
+            font-size: 39px;
+            color: #ffe200;
+        }
+
+        .mybooking-item-status {
+            width: 12%;
+            font-size: 23px;
+            display: flex;
+            text-align: left;
+            padding: 12px;
+        }
+
+        .status-icon {
+            padding-left: 4px;
+            font-weight: 800;
+            font-size: 25px;
+        }
+
+        .slotConfirm-main {
+            display: none;
+            position: fixed;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .slotConfirm-div {
+            border-radius: 23px;
+            background: linear-gradient(to bottom right, #ab00bf, #8300b9);
+            box-shadow: 0 0 20px 1px rgb(0 0 0);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: 0 10;
+        }
+
+        .slotConfirm-main-open {
+            display: block;
+        }
+
+        .slotConfirm-title {
+            text-align: center;
+            font-size: 246%;
+            font-weight: bold;
+            /* padding: 28px; */
+            background: linear-gradient(to right, red, yellow);
+            -webkit-text-fill-color: #ff31f969;
+            -webkit-background-clip: text;
+        }
+
+        .slotConfirm-left {
+            text-align: left;
+            background: #5800ff;
+            border-radius: 21px;
+            padding: 8px 24px 24px 24px;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slotConfirm-gamename {
+            font-size: 45px;
+            font-weight: 700;
+        }
+
+        .slotConfirm-club {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .slotConfirm-location {
+            font-size: 23px;
+            display: flex;
+        }
+
+        .slotConfirm-time {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-persons {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-amount {
+            display: flex;
+            font-size: 23px;
+        }
+
+        .slotConfirm-cancel-div {
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            /* top: 0; */
+            padding: 16px;
+        }
+
+        .slotConfirm-cancel-btn {
+            padding: 5px 86px;
+            color: #ffffffa1;
+            background: #ab2f2ff0;
+            font-size: 22px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+            .slotConfirm-cancel-btn:hover {
+                color: white;
+                background: #af0000;
+            }
+
+        .slotConfirm-rating-btn {
+            padding: 5px 86px;
+            color: #ffffffa1;
+            background: #ab2f2ff0;
+            font-size: 22px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+            .slotConfirm-rating-btn:hover {
+                color: white;
+                background: #af0000;
+            }
+
+        .slotConfirm-right {
+            background: #5800ff;
+            border-radius: 21px;
+            padding: 8px 24px 24px 24px;
+            text-align: center;
+        }
+
+        .slotConfirm-right-slot-id {
+        }
+
+        .slotConfirm-right-qr-code {
+            width: 100%;
+            height: 346px;
+            background: white;
+        }
+
+        .slotConfirm-right-qr-code-img {
+            width: 100%;
+            height: auto;
+            float: left;
+            max-width: 100%;
+        }
+
+        .info-icons {
+            padding-right: 10px;
+        }
+
+        .blur2 {
+            filter: blur(4px);
+        }
+
+        .rating-main {
+            display: none;
+            position: fixed;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .rating-div {
+            border-radius: 23px;
+            background: linear-gradient(to bottom right, #ab00bf, #8300b9);
+            box-shadow: 0 0 20px 1px rgb(0 0 0);
+            color: white;
+            /* padding: 20px; */
+            text-align: center;
+            margin: 0 10;
+        }
+
+        .rating-div-give-btnSet {
+        }
+
+        .rating-div-btnSet-btn {
+            background: transparent;
+            border: 0;
+            color: white;
+            font-size: 100px;
+        }
+
+        .rating-div-des {
+        }
+
+        .rating-des-text {
+            color: white;
+        }
+
+        .rating-Open {
+            display: block;
+        }
+
+        .r-hide {
+            display: none;
+        }
+
+        .r-show {
+            display: block;
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/NewCSS/slotSchedule.css" />
+}
+
+<div class="mybooking-title">
+    My Bookings
+</div>
+<div class="mybooking-set-div" id="mybookings">
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        fetch_Bookings();
+        $("#Genrating").html(generateStarIcons(5));
+    });
+
+    function generateStarIcons(rating) {
+
+        const fullStar = '<i class="fa fa-star rating-color"></i>';
+        const emptyStar = '<i class="fa fa-star"></i>';
+        const fullStars = fullStar.repeat(Math.floor(rating));
+        const halfStar = rating % 1 >= 0.5 ? '<i class="fa fa-star"></i>' : '';
+        const emptyStars = emptyStar.repeat(Math.floor(5 - rating));
+        return `${fullStars}${halfStar}${emptyStars}`;
+    }
+
+    function fetch_Bookings() {
+        $.ajax({
+            url: '/Booking/fetchUserBookings',
+            type: 'POST',
+            success: function (response) {
+                $("#mybookings").html(response);
+            }
+        });
+    }
+
+</script>
+

@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "_Layout_Login";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<div class="loginBg">
+    <img src="~/Assets/Backgrounds/Background 4.jpg" alt="Background" class="loginBg-img" />
+</div>
+<div class="row loginfram">
+    <div class="col-md-6 loginfram-left">
+        <img src="~/Assets/Illustration/downloadfile-2.jpg" alt="Background" class="loginStyle-img" />
+    </div>
+    <div class="col-md-6 loginfram-right">
+        <div class="form-area">
+            <div class="logInHeading">Log in</div>
+            <div class="f-d-error" id="error"></div>
+            <div class="form-area-field">
+                <div class="f-d-text-area" type="text">
+                    <div class="f-d-text">Email</div>
+                </div>
+                <input class="form-area-input" type="email" id="username" />
+            </div>
+            <div class="form-area-field">
+                <div class="f-d-text-area" type="text">
+                    <div class="f-d-text">Password</div>
+                </div>
+                <input class="form-area-input" id="password" type="password" />
+            </div>
+            <div class="form-area-field">
+                <div class="f-d-text-area" type="text">
+                    <input class="" id="remember" type="checkbox" />
+                    <div class="f-d-text">Remeber me</div>
+                </div>
+            </div>
+            <a href="/app/forgotView" class="backHomeBtn">Forgot Passwors ?</a>
+            <button class="f-d-submitBtn" onclick="login()">Log in</button>
+            <a href="/MemberRegister/registerView" class="backHomeBtn">Don't Have account ?</a>
+
+            <a class="backHomeBtn" href="/Member/Home">Back to home</a>
+        </div>
+    </div>
+</div>
+
+<!--
+
+<h1>Login</h1>
+<h4 style="color: red;" id="error"></h4>
+
+<br>
+<label>Enter username :</label>
+<input type="text" placeholder="enter username" id="username" />
+
+<br>
+<label>Enter password :</label>
+<input type="password" placeholder="enter password" id="password" />
+
+<br>
+<input type="checkbox" id="remember"> Remember Me <br>
+
+<button onclick="login()">Login</button>
+<br><br>
+<a href="/app/forgotView">Forgot Password</a>
+<br>
+<a href="/MemberRegister/registerView">Registred</a>
+-->
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/app/checkSession',
+            method: 'POST',
+            success: function (data) {
+                console.log(data);
+                if (data != "") { 
+                    if (data == "tblMember") {
+                        window.location.href = "/Member/Home";
+                    }
+                    else if (data == "tblManager") {
+                        window.location.href = "/Manager/Home";
+                    }
+                    else if (data == "tblAdmin") {
+                        window.location.href = "/Admin/Home";
+                    }
+                }
+            }
+        });
+    });
+
+    function login() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var remember = $("#remember").is(":checked");
+        console.log(remember);
+        $.ajax({
+            url: '/app/login',
+            method: 'POST',
+            data: { username: username, password: password, remember: remember },
+            success: function (data) {
+                console.log(data);
+
+                if (data == "username") {
+                    $("#error").text("username is not found");
+                }
+                else if (data == "password") {
+                    $("#error").text("wrong password");
+                }
+                else if (data == "error") {
+                    $("#error").text("error found in login");
+                }
+                else {
+                    if (data == "Member") {
+                        window.location.href = "/Member/Home";
+                    }
+                    else if (data == "Manager") {
+                        window.location.href = "/Manager/Home";
+                    }
+                    else if (data == "Admin") {
+                        window.location.href = "/Admin/Home";
+                    }
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });       
+    }
+
+</script>
+
+<script type="text/javascript">
+    function preventBack() {
+        window.history.forward();
+    }
+
+    setTimeout("preventBack()", 0);
+
+    window.onunload = function () { null };
+</script>

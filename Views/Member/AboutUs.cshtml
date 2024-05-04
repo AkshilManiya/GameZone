@@ -1,0 +1,483 @@
+﻿
+@{
+    ViewData["Title"] = "AboutUs";
+    Layout = "MemberLayout";
+}
+
+@section styles {
+    <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    .column {
+      float: left;
+      width: 33.3%;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
+
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      margin: 8px;
+    background: aliceblue;
+    }
+
+    .about-section {
+      padding: 50px;
+      text-align: center;
+      background-color: #00b0ff7a;
+      color: white;
+      backdrop-filter: blur(8px);
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    .container {
+      padding: 0 16px;
+    }
+
+    .container::after,
+    .row::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .title {
+      color: grey;
+    }
+
+    .button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #00717F;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .button:hover {
+      background-color: #000B22;
+    }
+
+   
+    
+    .section-padding {
+            padding-top: 100px;
+            padding-bottom: 100px
+        }
+
+        .section-bg {
+            background-color: var(--section-bg-color)
+        }
+
+        .custom-block-wrap {
+            background: var(--white-color);
+            border-radius: var(--border-radius-medium);
+            position: relative;
+            overflow: hidden;
+            transition: all .5s
+        }
+
+        .custom-block-wrap:hover {
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175)
+        }
+
+        .custom-block-body {
+            padding: 30px
+        }
+
+        .custom-block-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .custom-icon {
+            color: var(--secondary-color)
+        }
+
+        .custom-list {
+            margin-bottom: 0;
+            padding-left: 0
+        }
+
+        .custom-list-item {
+            list-style: none;
+            margin-top: 10px;
+            margin-bottom: 10px
+        }
+
+        .custom-text-box {
+          background: #0000004d;
+          border-radius: 10px;
+          /* margin-bottom: 24px; */
+          padding: 20px 40px;
+          height: 100%;
+        }
+
+        .custom-text-box-image {
+            border-radius: var(--border-radius-medium);
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .custom-text-box-icon {
+            background: var(--section-bg-color);
+            border-radius: var(--border-radius-large);
+            color: var(--secondary-color);
+            font-size: var(--h6-font-size);
+            text-align: center;
+            display: inline-block;
+            vertical-align: middle;
+            width: 25px;
+            height: 25px;
+            line-height: 30px
+        }
+
+        .about-section {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover
+        }
+
+        .about-image {
+            border-radius: var(--border-radius-medium);
+            display: block;
+            width: 350px;
+            height: 400px;
+            object-fit: cover
+        }
+
+        .custom-text-block {
+            padding: 60px 40px
+        }
+
+        .counter-thumb {
+            margin: 20px;
+            margin-bottom: 0
+        }
+
+        .counter-number,
+        .counter-text {
+            color: var(--secondary-color);
+            display: block
+        }
+
+        .counter-number,
+        .counter-number-text {
+            color: var(--primary-color);
+            font-size: var(--h1-font-size);
+            font-weight: var(--font-weight-bold);
+            line-height: normal
+        }
+
+        body {
+            background-image: url("ProPhotos/purple\ bg\ 1.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .rating {
+
+            color: #fff900;
+            font-size: 30px;
+        }
+
+        .section-bg {
+            background-color: #0000001a;
+            /* margin-left: 15%; */
+            /* margin-right: 15%; */
+            /* margin-top: 0%; */
+            padding-left: 15%;
+            padding-right: 15%;
+            padding-top: 1%;
+            padding-bottom: 2%;
+        }
+
+        .gameTitle {
+            color: #fcfeff;
+            margin-bottom: 0;
+            font-size: 46px;
+            letter-spacing: -2px;
+        }
+
+        .clubTitle {
+          color: #b6ddff;
+          font-size: 24px;
+          margin-bottom: 7px;
+        }
+
+        .gameDetails {
+            color: #dbf5ff;
+            font-size: 16px;
+            font-weight: 300;
+            margin-bottom: 2px;
+            display: flex;
+            background: transparent;
+            border: 0;
+        }
+
+        .gameDetails-icon2 {
+            margin-right: 5px;
+        }
+
+        .gameImg-block {
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gameImg-image {
+            /* height: auto; */
+            max-width: 100%;
+            max-height: 100%;
+            background-size: cover;
+        }
+
+        .gameImg-caption {
+            background: #2d00b3c7;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            padding: 10px 20px;
+            color: #ffffff;
+        }
+
+        .section-padding2 {
+            padding-top: 20px;
+            padding-bottom: 20px
+        }
+
+        .h2Title3 {
+            color: white;
+            font-size: 46px;
+            letter-spacing: -2px;
+            border-radius: 25px;
+            background-color: #25014970;
+            padding: 12px;
+            /* content: url(ProPhotos/games\ Bg.jpg); */
+            background: url(ProPhotos/Backgrounds/employeeBG.png);
+            background-repeat: no-repeat, repeat;
+            background-size: cover;
+        }
+
+        .custom-block-wrap {
+            background: #2c124d;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all .5s;
+        }
+
+        .custom-block-wrap:hover {
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175)
+        }
+
+        .custom-block-over {
+            position: relative;
+            /* overflow: hidden; */
+        }
+
+        .custom-block-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .custom-block {
+            border-radius: 0;
+            display: block
+        }
+
+        .custom-block-body {
+            padding: 30px
+        }
+
+        .gamesTitle {
+            color: #1ac931;
+            font-size: 24px;
+        }
+
+        .gamesDetails {
+            color: #e5e5e5;
+            font-size: 16px;
+            /* font-weight: var(--font-weight-light) */
+        }
+
+        .rating {
+            color: #fff900;
+            font-size: 30px;
+        }
+
+        .progress {
+            background: white;
+            height: 5px
+        }
+
+        .progress-bar {
+            background: #d212dd;
+        }
+
+        .custom-btn-book {
+            border-radius: 0;
+            display: block;
+            background: #089d4c;
+            border: 2px solid transparent;
+            /* border-radius: 100px; */
+            color: white;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: normal;
+            padding: 15px 25px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .custom-btn-book:hover {
+            background: #077338;
+            color: white;
+        }
+
+        .custom-block-wrap-offer {
+            background-image: url(ProPhotos/Backgrounds/offerBlastBg.png);
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            /* left: 0; */
+            /* bottom: 0; */
+            border: 0;
+            font-size: 25px;
+            color: black;
+            background-repeat: no-repeat, repeat;
+            background-size: cover;
+            margin: -30px;
+            z-index: 8;
+            text-align: center;
+            padding-top: 39px;
+            font-weight: 900;
+            rotate: 339deg;
+        }
+
+        .moreDiv {
+          margin-top: 10px !important;;
+        }
+  </style>
+}
+
+  <div class="BodyContant" id="contant">
+    
+    <div class="about-section">
+      <h1>About Us Page</h1>
+      <div class="row">
+          <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+              <div class="custom-text-box">
+                  <h2 class="gameTitle">Game Zone Portal</h2>
+                  <!-- <div class="rating">202106100110021</div></strong> -->
+                  <h5 class="clubTitle">The path of happiness</h5>
+                  <p class="gameDetails">Gmail : gameZoneHelp@gmail.in</p>
+                  <p class="gameDetails">Contact : 92-234-24321</p>
+                  <p class="gameDetails"> <i class="ri-map-pin-fill gameDetails-icon2"></i> A-4 101 shivpark, Velenja, Surat</p>
+                  <button class="gameDetails" onclick="openContactUsForm()">Contact us</button>
+              </div>
+          </div>
+          <div class="col-lg-6 col-12">
+              <div class="custom-text-box">
+                  <!-- <h2 class="gameTitle">Game Zone</h2> -->
+                  <div class="rating">About our service</div></strong>
+                  <p class="gameDetails">
+                      In present time, everyone wants to do everything. The Game Zone, a popular entertainment center, currently faces challenges related to manual slot booking processes, resulting in long queues and customer dissatisfaction. Additionally, members are facing a lack of real-time information about slot availability. To address these operational bottlenecks and enhance customer convenience, the center aims to develop an online slot booking system.
+                  </p>
+                  <!-- <p class="gameDetails"> <i class="ri-map-pin-fill gameDetails-icon2"></i> A-4 101 shivpark, Velenja, Surat</p> -->
+                  <!-- <button class="gameDetails"> <i class="ri-phone-fill gameDetails-icon2"></i> Contact us</button> -->
+              </div>
+          </div>
+          <div class="moreDiv">
+              <div class="custom-text-box">
+                  <!-- <h2 class="gameTitle">Game Zone</h2> -->
+                  <!-- <div class="rating">About our service</div></strong> -->
+                  <h5 class="clubTitle">More</h5>
+                  <p class="gameDetails">
+                      The primary purpose of implementing the Game Zone Online Slot Booking System is to improve customer convenience by eliminating the need for physical bookings or waiting in long queues. Customers can access the system anytime and from anywhere, easily selecting and booking their desired slots with just a few clicks. This enhanced convenience leads to higher customer satisfaction and encourages repeat visits to the Game Zone.
+                  </p>
+                  <!-- <p class="gameDetails"> <i class="ri-map-pin-fill gameDetails-icon2"></i> A-4 101 shivpark, Velenja, Surat</p> -->
+                  <!-- <button class="gameDetails"> <i class="ri-phone-fill gameDetails-icon2"></i> Contact us</button> -->
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <h2 style="text-align:center;color: #3f97bf;">Our Team</h2>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <!--
+
+            <img src="/w3images/team1.jpg" alt="Jane" style="width:100%">
+          -->
+          <div class="container">
+            <h2>Akshil Maniya</h2>
+            <p class="title">202106100110005</p>
+            <p>Backend developer</p>
+            <p>21bmiit005@gmail.com</p>
+            <p><button class="button">Contact</button></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card">
+          <!--
+
+            <img src="/w3images/team2.jpg" alt="Mike" style="width:100%">
+          -->
+          <div class="container">
+            <h2>Darvin Dobariya</h2>
+            <p class="title">202106100110021</p>
+            <p>Frontend Developer And Integration Manager</p>
+                    <p>21bmiit005@gmail.com</p>
+            <p><button class="button">Contact</button></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="card">
+            <!--
+
+          <img src="/w3images/team3.jpg" alt="John" style="width:100%">
+            -->
+          <div class="container">
+            <h2>Prachi Satani</h2>
+            <p class="title">202106100110058</p>
+            <p>Graphic Designer And Documentation</p>
+                    <p>21bmiit058@gmail.com</p>
+            <p><button class="button">Contact</button></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

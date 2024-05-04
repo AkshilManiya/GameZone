@@ -1,0 +1,749 @@
+﻿
+@{
+ViewData["Title"] = "SlotView";
+Layout = "MemberLayout";
+}
+
+@section styles {
+<style>
+    .slot{
+        border: 1px solid gray;
+        padding: 5px;
+        margin: 5px; 
+    }
+
+        .dayBtns-bg {
+            background: #00000057;
+            /* border-radius: var(--border-radius-medium); */
+            /* margin-bottom: 24px; */
+            /* padding: 40px; */
+            height: 100%;
+            text-align: center;
+        }
+
+        .day-button {
+            /* background: #8d33dd; */
+            background: linear-gradient(to bottom right, #41a3e9, #2252b5);
+            color: white;
+            height: 94px;
+            width: 74px;
+            border: 0;
+            border-radius: 15px;
+            margin-top: 17px;
+            margin-bottom: 17px;
+            margin-left: 7px;
+            margin-right: 7px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 26px #01c1ff52;
+            /* box-shadow: 0px 0px 50px 20px #a400ff; */
+        }
+
+            .day-button:hover {
+                background: linear-gradient(to bottom right, #7cc8ff, #041e54);
+                height: 111px;
+                width: 96px;
+                margin-top: 4px;
+                margin-bottom: 4px;
+                margin-left: 7px;
+                margin-right: 7px;
+                /* border: solid 3px #b8a5ff; */
+                box-shadow: 0px 0px 50px 20px #01c1ff91;
+                font-size: 20px;
+            }
+
+        .active-button {
+            background: linear-gradient(to bottom right, #9a41e9, #6822b5);
+            height: 111px;
+            width: 96px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            margin-left: 7px;
+            margin-right: 7px;
+            /* border: solid 3px #b8a5ff; */
+            box-shadow: 0px 0px 50px 20px #a400ff9e;
+            font-size: 20px;
+        }
+
+        .dateTitle {
+            font-size: 201%;
+            padding-bottom: 49px;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            top: 0;
+            font-size: 265%;
+        }
+
+        .dayName {
+            background: #00ff2d96;
+            /* background: linear-gradient(to bottom right, #7f0de5, #390c6b); */
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            padding: 5px 5px;
+            color: var(--white-color);
+            font-size: 112%;
+        }
+
+        .section-schedule {
+            background-color: #00000021;
+            padding-left: 9%;
+            padding-right: 9%;
+            padding-top: 1%;
+            padding-bottom: 3%;
+            width: 100%;
+        }
+
+        .section-schedule-container {
+            background: #0000003d;
+            border-radius: var(--border-radius-medium);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section-schedule-slots {
+            padding: 3%;
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+
+        .slot-button {
+            background: #9c3be3;
+            padding: 3%;
+            border: 0;
+            border-radius: var(--border-radius-medium);
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            color: white;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .slot-button-touch {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            top: 0;
+            background: none;
+            border: 0;
+        }
+
+        .slot-button:hover {
+            border: 1px solid white;
+        }
+
+        .slot-time {
+            background: #6500af;
+            /* background: linear-gradient(to bottom right, #7f0de5, #390c6b); */
+            position: absolute;
+            /* bottom: 0; */
+            right: 0;
+            left: 0;
+            top: 0;
+            padding: 5px 5px;
+            padding: 7px;
+        }
+
+        .slot-time-text {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .slot-details {
+            width: 100%;
+            max-width: 100%;
+            margin-top: 38px;
+            /* padding: 7px; */
+        }
+
+        .slot-rent {
+            padding: 5px 5px;
+        }
+
+        .slot-status {
+            /* background: linear-gradient(to bottom right, #7f0de5, #390c6b); */
+            position: absolute;
+            /* bottom: 0; */
+            right: 0;
+            /* left: 0; */
+            top: 0;
+            padding: 5px 5px;
+            padding: 10px;
+            border-radius: 50%;
+            margin: 9px;
+            box-shadow: inset 0px 0px 7px 0px #0000009e;
+            /* box-shadow: 0px 0px 50px 20px #a400ff9e; */
+        }
+
+        .available {
+            background: #00ff39;
+        }
+
+        .not-available {
+            background: #001dff;
+        }
+
+        .booked {
+            background: #ff0000;
+        }
+
+        .schedule-info {
+            background: #0070b382;
+            position: absolute;
+            /* bottom: 0; */
+            right: 0;
+            left: 0;
+            top: 0;
+            padding: 5px 5px;
+            padding: 7px;
+            color: white;
+            display: flex;
+            font-size: 15px;
+        }
+
+        .schedule-info-left {
+            margin-left: 8px;
+        }
+
+        .schedule-info-right {
+            position: absolute;
+            /* bottom: 0; */
+            right: 0;
+            top: 0;
+            padding: 5px 5px;
+            display: flex;
+            margin-right: 8px;
+        }
+
+        .dot {
+            width: 1px;
+            height: 1px;
+            padding: 6px;
+            border-radius: 50%;
+            margin-top: 4px;
+            margin-right: 5px;
+            margin-left: 13px;
+        }
+
+        .available-dot {
+            background: #00f537;
+        }
+
+        .booked-dot {
+            background: #f50000;
+        }
+
+        .not-available-dot {
+            background: #001dfd;
+        }
+
+        .schedule-shift {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .morning {
+            color: #ebffaf;
+        }
+
+        .afternoon {
+            color: #ffc53d;
+        }
+
+        .night {
+            color: #ff6969
+        }
+
+        .slotsTop {
+            padding-top: 41px;
+        }
+
+        .shift-icon {
+        }
+
+        /*Update slider*/
+        .booking-container {
+            display: none;
+            position: fixed;
+            /* height: 65%; */
+            width: 488px;
+            /* margin: 18px; */
+            border-radius: 23px;
+            /* background: linear-gradient(to bottom right, #ffffff, #e2d3e7); */
+            background: linear-gradient(to bottom right, #ffffffb5, #ffffffc7);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 0 20px 1px rgb(0 0 0);
+            z-index: 2;
+            transition: right 0.3s ease-in-out;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .booking-container-open {
+            display: block;
+        }
+
+        .bookingForm {
+            text-align: center;
+        }
+
+        .booking-title {
+            text-align: center;
+            font-size: 246%;
+            font-weight: bold;
+            /* padding: 28px; */
+            background: linear-gradient(to right, red, yellow);
+            -webkit-text-fill-color: #ff31f969;
+            -webkit-background-clip: text;
+        }
+
+        .booking-fields {
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .booking-deatils {
+            display: flex;
+            margin-left: 11%;
+            margin-right: 11%;
+            padding-bottom: 16px;
+        }
+
+        .booking-deatils-name {
+            width: 37%;
+            font-size: 22px;
+            color: #ffffffa8;
+        }
+
+        .booking-member-details {
+            /* background: #7e1baf5e; */
+            background: #009d7f75;
+            border-radius: 17px;
+            padding: 13px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .booking-game-details {
+            background: #009d7f;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            /* padding: 0px; */
+            padding-left: 18px;
+            padding-top: 5px;
+            padding-bottom: 1px;
+            font-size: 22px;
+        }
+
+        .booking-g-d-left {
+        }
+
+        .booking-g-d-right {
+        }
+
+        .booking-m-d-area {
+            margin-top: 38px;
+            padding-left: 40px;
+            padding-right: 40px;
+            font-size: 19px;
+        }
+
+        .booking-m-d-area-div {
+            display: flex;
+        }
+
+        .booking-m-d-left {
+            width: 50%;
+            text-align: end;
+            padding-right: 6px;
+        }
+
+        .booking-m-d-right {
+            width: 50%;
+            text-align: initial;
+        }
+
+        .booking-m-area {
+            /* background: #7e1baf5e; */
+            background: #009d7f75;
+            border-radius: 17px;
+            padding: 13px;
+            margin-top: 10px;
+            display: flex;
+        }
+
+        .booking-m-text {
+            width: 53%;
+        }
+
+        .booking-m-input {
+            width: 48%;
+        }
+
+        .booking-bill-area {
+            /* background: #7e1baf5e; */
+            background: #009d7f75;
+            border-radius: 17px;
+            padding: 13px;
+            margin-top: 10px;
+        }
+
+        .booking-bill-deatils {
+            display: flex;
+            /* padding-left: 13px; */
+            padding: 0px;
+            padding-left: 12px;
+            padding-right: 12px;
+            font-size: 21px;
+        }
+
+        .booking-b-d-left {
+            width: 50%;
+            text-align: left;
+        }
+
+        .booking-b-d-right {
+            width: 50%;
+            text-align: right;
+        }
+
+        .booking-button {
+            border: 0;
+            color: #ffffff;
+            /* background: #571eff; */
+            background: #009d7f91;
+            width: 100%;
+            padding: 10px;
+            font-size: 24px;
+            border-radius: 29px;
+            border: 0;
+            margin-top: 10px;
+            box-shadow: 0px 0px 0px 0px rgb(0 0 0);
+        }
+
+            .booking-button:hover {
+                background: #009d7f;
+                box-shadow: 0px 0px 20px 0px rgb(138, 138, 138);
+            }
+
+        .booking-bill-deatils-line {
+            margin: 10px;
+            background-color: white;
+            border: none;
+            height: 2px;
+        }
+        .cabcjkab{
+            color:white;
+        }
+
+</style>
+        <link rel="stylesheet" href="~/css/NewCSS/slotSchedule.css" />
+
+    <link rel="stylesheet" href="~/css/NewCSS/slotS.css" />
+}
+
+<section class="section-padding section-bg" id="section_2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                <div class="gameImg-block">
+                    <img src="/Assets/Game/@ViewBag.image" id="GameImage" class="gameImg-image" alt="Game image">
+                    <div class="gameImg-caption" id="GameCaption">
+                        <!-- <a href="" class="category-block-link"> -->
+                        @ViewBag.caption
+                        <!-- </a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="custom-text-box">
+                    <h2 class="gameTitle" id="GameName">@ViewBag.game_name</h2>
+                    <div class="rating" id="GameOffer">@ViewBag.offer</div>
+                    <h5 class="clubTitle" id="GameClub">@ViewBag.club_name</h5>
+                    <p class="gameDetails" id="GameMembers">@ViewBag.menager</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="dayBtns-bg">
+    <!-- <form action=""> -->
+    <button class="day-button">
+        <strong class="dateTitle" id="btn1">3</strong><br>
+        <div class="dayName">Fri </div>
+    </button>
+    <button class="day-button">
+        <strong class="dateTitle" id="btn2">4</strong><br>
+        <div class="dayName">Sat </div>
+    </button>
+    <button class="day-button">
+        <strong class="dateTitle" id="btn3">5</strong><br>
+        <div class="dayName">Sun </div>
+    </button>
+    <button class="day-button">
+        <strong class="dateTitle" id="btn4">6</strong><br>
+        <div class="dayName"> Mon </div>
+    </button>
+    <button class="day-button">
+        <strong class="dateTitle" id="btn5">7</strong><br>
+        <div class="dayName"> Tue </div>
+    </button>
+    <button class="day-button">
+        <strong class="dateTitle" id="btn6">8</strong><br>
+        <div class="dayName">Wed</div>
+    </button>
+    <button class="day-button">
+        <strong class="dateTitle" id="btn7">9</strong><br>
+        <div class="dayName">Thur</div>
+    </button>
+    <!-- </form> -->
+</section>
+
+<section class="section-schedule">
+    <div class="section-schedule-container">
+        <div class="schedule-info">
+            <div class="schedule-info-left">Slot Schedule | Book the slot whatever you like</div>
+            <div class="schedule-info-right">
+                <div class="dot available-dot"></div> Available
+                <div class="dot booked-dot"></div> Booked
+                <div class="dot not-available-dot"></div> Not available
+            </div>
+        </div>
+
+        <div class="row section-schedule-slots slotsTop">
+            <div class="schedule-shift morning">
+                Morning
+                <i class="ri-sun-fill shift-icon" style="font-size: 30px; font-weight:lighter; "></i>
+            </div>
+            <div class="row" id="morning">
+            </div>
+        </div>
+        <div class="row section-schedule-slots">
+            <div class="schedule-shift afternoon">
+                Afternoon
+                <i class="ri-sun-cloudy-fill" style="font-size: 30px; font-weight:lighter; "></i>
+            </div>
+            <div class="row" id="afternoon">
+            </div>
+        </div>
+        <div class="row section-schedule-slots">
+            <div class="schedule-shift night">
+                Night
+                <i class="ri-moon-fill" style="font-size: 30px; font-weight:lighter; "></i>
+            </div>
+            <div class="row" id="night">
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+
+<section class="section-schedule">
+    <div class="section-schedule-container">
+        <div class="schedule-info">
+            <div class="schedule-info-left">Slot Schedule | Book the slot whatever you like</div>
+            <div class="schedule-info-right">
+                <div class="dot available-dot"></div> Available
+                <div class="dot booked-dot"></div> Booked
+                <div class="dot not-available-dot"></div> Not available
+            </div>
+        </div>
+        <div class="row section-schedule-slots slotsTop">
+            <div class="schedule-shift morning">
+                Morning
+                <i class="ri-sun-fill shift-icon" style="font-size: 30px; font-weight:lighter; "></i>
+            </div>
+            <table id="morning"></table>
+        </div>
+        <div class="row section-schedule-slots">
+            <div class="schedule-shift afternoon">
+                Afternoon
+                <i class="ri-sun-cloudy-fill" style="font-size: 30px; font-weight:lighter; "></i>
+            </div>
+            <table id="afternoon"></table>
+        </div>
+        <div class="row section-schedule-slots">
+            <div class="schedule-shift night">
+                Night
+                <i class="ri-moon-fill" style="font-size: 30px; font-weight:lighter; "></i>
+            </div>
+            <table id="night"></table>
+        </div>
+    </div>
+</section>
+-->
+<!--
+
+<h1>SlotView</h1>
+
+<div>
+<img src="/Assets/Game/@ViewBag.image" id="GameImage" style="width:250px; height:100px;"></img>
+<div>
+    <h1>
+        <div id="GameName">@ViewBag.game_name</div>
+    </h1>
+    <b><div id="GameClub">@ViewBag.club_name</div></b>
+    <div id="GameOffer">@ViewBag.offer</div>
+    <div id="GameMembers">@ViewBag.menager</div>
+    <div id="GameRating">@ViewBag.rating</div>
+    <div id="GameCaption">@ViewBag.caption</div>
+</div>
+</div>
+
+<div>
+<button onclick="" id="btn1">btn1</button>
+<button onclick="" id="btn2">btn2</button>
+<button onclick="" id="btn3">btn3</button>
+<button onclick="" id="btn4">btn4</button>
+<button onclick="" id="btn5">btn5</button>
+<button onclick="" id="btn6">btn6</button>
+<button onclick="" id="btn7">btn7</button>
+</div>
+
+
+<div>
+<table class="cabcjkab">
+        <tr>Morning</tr>
+    
+    <tr id="morning"></tr>
+        <tr>
+        Afternoon
+
+        </tr>
+    <tr id="afternoon"></tr>
+    <tr>
+    Night
+
+    </tr>    
+    <tr id="night"></tr>
+</table>
+</div>
+
+-->
+<!--
+
+<div class="col-lg-2 col-12 mb-5 mb-lg-0">
+    <div class="slot-button">
+        <div class="slot-time">
+            <div class="slot-time-text">" + reader["Starting_time"].ToString() + "</div>
+        </div>
+        <div class="slot-details">
+            <div class="slot-rent">" + ConvertTime(Convert.ToInt32(reader["Duration"])) + "</div>
+            <div class="slot-rent">"+ reader["Rant"] + "</div><br>
+        </div>
+        <div>" + btn + "<div>
+    </div>
+</div>
+-->
+
+<script>
+    const buttons = document.querySelectorAll('.day-button');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            buttons.forEach(btn => {
+                btn.classList.remove('active-button')
+            });
+            button.classList.add('active-button');
+        });
+    });
+</script>
+<script>
+    let bookingSlider;
+    const slider3 = document.getElementById('Bookingslider');
+    let sliderOpen3 = false;
+
+    function openSliderBtnCE() {
+        bookingSlider = event.target;
+        if (!sliderOpen3) {
+            sliderOpen3 = true;
+            document.body.style.overflow = 'hidden'; // Hide overflow to prevent scrollbar
+            contant.classList.add('blur');
+            slider3.classList.add("booking-container-open");
+        }
+    }
+    document.addEventListener('click', function (event) {
+        if (sliderOpen3 && event.target !== bookingSlider && !slider3.contains(event.target)) {
+            sliderOpen3 = false;
+            document.body.style.overflow = 'visible'; // Restore overflow
+            contant.classList.remove('blur');
+            slider3.classList.remove("booking-container-open");
+        }
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+var Day = 0; 
+
+$(document).ready(function () {
+    var today = new Date();
+    for (var i = 0; i <= 6; i++) {
+        var button = document.getElementById('btn' + (i+1));
+        var date = addDays(today, i);
+        if (i == 0) { 
+            Day = date;
+        }
+        button.setAttribute('onclick', 'onchangeday("' + date + '")');
+        
+    }
+        // var today = new Date();
+        // for (var i = 0; i <= 6; i++) {
+        //     var button = document.getElementById('btn' + (i + 1));
+        //     var date = addDays(today, i);
+        //     if (i == 0) {
+        //         Day = date;
+        //     }
+        //     var dateString = date.getDate(); // Extract only the date part
+        //     button.setAttribute('onclick', 'onchangeday("' + date + '")');
+        //     button.textContent = dateString; // Set only the date in button text content
+        // }
+
+    fetch_Slots();
+});
+
+function onchangeday(date) {
+    Day = date;
+    fetch_Slots();
+}
+
+
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result.toISOString().slice(0, 10);
+}
+
+
+function fetch_Slots() {
+    var d = Day.toString();
+    $.ajax({
+        url: '/Slot/fetchSlotUser',
+        type: 'POST',
+        data: { id: @ViewBag.Id, day: d},
+        success: function (response) 
+        {
+            console.log(response);
+            $("#morning").html(response["morning"]);
+            $("#afternoon").html(response["afternoon"]);
+            $("#night").html(response["night"]);
+        }
+    });
+}
+
+function BookSlot(id) {
+    console.log(id);
+}
+</script>

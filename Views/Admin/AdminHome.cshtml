@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewData["Title"] = "AdminHome";
+    Layout = "AdminLayout";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        console.log("ready!");
+        $.ajax({
+            url: '/app/checkSession',
+            method: 'POST',
+            success: function (data) {
+                console.log(data);
+                if (data == "") {
+                    $("#profile").hide();
+                    $("#logout").hide();
+                }
+                else {
+                    $("#profile").show();
+                    $("#logout").show();
+                    $("#user").text(data);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+
+    });
+</script>
+
+<h1>AdminHome</h1>
+@* <h4 id="user"></h4>
+
+<button id="profile" onclick="window.location.href='Profile';">Profile</button>
+<button id="logout" onclick="window.location.href='/app/logout';">Logout</button>
+ *@

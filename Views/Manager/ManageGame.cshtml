@@ -1,0 +1,357 @@
+﻿
+@{
+    ViewData["Title"] = "ManageGame";
+    Layout = "ManagerLayout";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/css/NewCSS/ClubManager.css" />    
+}
+
+
+
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Manage Games
+                    </div>
+                </div>
+            </div>
+            <div class="manageGameMain-table-div">
+                <table class="Admin-table">
+                    <thead>
+                        <tr class="Admin-t-tr">
+                            <th class="Admin-t-th">number</th>
+                            <th class="Admin-t-th">name</th>
+                            <th class="Admin-t-th">offer</th>
+                            <th class="Admin-t-th">members</th>
+                            <th class="Admin-t-th">rating</th>
+                            <th class="Admin-t-th">caption</th>
+                            <th class="Admin-t-th">charge</th>
+                            <th class="Admin-t-th">Opreation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="GameData">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Update Game
+                    </div>
+                </div>
+            </div>
+            <div class="row manageGameMain-table-div">
+                <div class="col-lg-6 manageGameMain-div-leftC">
+                    <div class="g-g-f" style="">
+                    <img class="m-d-lc-img" src="" alt="ProfileImage" id="image"></img>
+                    </div>
+                    <br>
+                    <button class="m-d-lc-img-btn" onclick="ProfileUpdate()">Change Image</button>
+                </div>
+                <div class="col-lg-6 manageGameMain-div-rightC">
+                    <div class="form-area">
+                        <div class="logInHeading">Details</div>
+                        <div class="f-d-error" id="error"></div>
+
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Game name</div>
+                                <div class="f-d-error" id="nameerror"></div>
+                            </div>
+                            <input class="form-area-input" type="text" id="GameName" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Game Members</div>
+                                <div class="f-d-error" id="membererror"></div>
+                            </div>
+                            <input class="form-area-input" type="number" id="GameMember" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Game Caption</div>
+                                <div class="f-d-error" id="captionerror"></div>
+                            </div>
+                            <input class="form-area-input" type="text" id="GameCap" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Game offer</div>
+                                <div class="f-d-error" id="offererror"></div>
+                            </div>
+                            <input class="form-area-input" type="number" id="GameOffer" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Charge method</div>
+                                <div class="f-d-error" id="valid_name"></div>
+                            </div>
+                            <input type="radio" name="chargeMethod" id="perPerson" />Per Person<br />
+                            <input type="radio" name="chargeMethod" id="perHour" />Per Hour
+                        </div>
+
+                        <button class="f-d-submitBtn" onclick="updategame()">Save</button>
+                    </div>
+                    <!--
+                    <div class="m-d-rc-input-div">
+                        <label>Enter Game name : </label>
+                        <label id="nameerror"></label>
+                        <input type="text" placeholder="enter Game name" id="GameName">
+                    </div>
+                    
+                    <div class="m-d-rc-input-div">
+                        <label>Enter Game Members : </label>
+                        <label id="membererror"></label>
+                        <input type="text" placeholder="enter Game Member" id="GameMember">
+                    </div>
+       
+                    <div class="m-d-rc-input-div">
+                        <label>Enter Game Caption : </label>
+                        <input type="text" placeholder="enter Game Caption" id="GameCap">
+                        <label id="captionerror"></label>
+                    </div>
+
+                    <div class="m-d-rc-input-div">
+                        <label>Enter Game offer : </label>
+                        <label id="offererror"></label>
+                        <input type="number" placeholder="enter Game offer" id="GameOffer">
+                    </div>
+
+                    <div class="m-d-rc-input-div">
+
+                        <label>select Charge method : </label>
+                        <label id="chargeerror"></label><br>
+                        <input type="radio" name="chargeMethod" id="perPerson" value="1">Per Person<br>
+                        <input type="radio" name="chargeMethod" id="perHour" value="2">Per Hour<br>
+                    </div>
+
+                    <div class="m-d-rc-input-div">
+                        <button class="m-d-rc-button" onclick="updategame()">Update Game</button>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    function hideUper() {
+        $("#hideUper").hide();
+        $("#hideDown").show();
+    }
+    function hideDown() {
+        $("#hideUper").show();
+        $("#hideDown").hide();
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    var ids = 0;
+
+    $(document).ready(function () {
+        fetch_Game();
+        hideDown();
+    });
+
+    function save_image(filename) {
+        $.ajax({
+            url: '/Game/UpdateGameImage',
+            type: 'POST',
+            data: { id: ids, img: filename },
+            success: function (response) {
+                if (response !== "success") {
+                    console.log("image upadated");
+                } else {
+                    $("#image").attr("src", "/Assets/Game/" + filename);
+
+                }
+            }
+        });
+    }
+
+    function uploadImage(selectedFile) {
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+
+        $.ajax({
+            url: '/Upload/Game',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            async: false,
+            success: function (response) {
+                if (response.success) {
+                    $("#uploadStatus").text("Upload successful!");
+                } else {
+                    $("#uploadStatus").text("Upload failed: " + response.message);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                $("#uploadStatus").text("Upload error: " + errorThrown);
+            }
+        });
+    }
+
+    function ProfileUpdate() {
+        const fileInput = document.createElement('input');
+        var fileName;
+        fileInput.type = 'file';
+        fileInput.accept = '.jpg, .jpeg, .png, .webp';
+        fileInput.style.display = 'none';
+        fileInput.click();
+        fileInput.addEventListener('change', function () {
+            const selectedFile = fileInput.files[0];
+            if (selectedFile) {
+                fileName = selectedFile.name;
+                if (isAllowedFileType(fileName)) {
+                    uploadImage(selectedFile);
+                    save_image(fileName);
+                } else {
+                    alert('Invalid file type. Please select a jpg, jpeg, png, or webp image.');
+                }
+            }
+        });
+    }
+
+    function isAllowedFileType(fileName) {
+        const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+        const extension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+        return allowedExtensions.includes(extension);
+    }
+
+
+    function fetch_Game() {
+        $.ajax({
+            url: '/Game/fetchGame',
+            type: 'POST',
+            success: function (response) {
+                $("#GameData").empty();
+                $("#GameData").html(response);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function disablegame(id) {
+        $.ajax({
+            url: '/Game/DisableGame',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+                if (response == "success") {
+                    fetch_Game();
+                }
+                else {
+                    alert("error deleting");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function enablegame(id) {
+        $.ajax({
+            url: '/Game/EnableGame',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+                if (response == "success") {
+                    fetch_Game();
+                }
+                else {
+                    alert("error deleting");
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+
+    function updategameview(id) {
+        $.ajax({
+            url: '/Game/UpdateGameView',
+            type: 'POST',
+            data: { id: id },
+            success: function (response) {
+                console.log(response);
+                document.getElementById('image').src = `http://localhost:5003/Assets/Game/${response['image']}`;
+                $('#GameName').val(response['name']);
+                $('#GameMember').val(response['member']);
+                $("#GameCap").val(response['cap']);
+                $("#GameOffer").val(response['offer']);
+                if (response['method'] == 1) {
+                    $("#perPerson").prop("checked", true);
+                } else {
+                    $("#perHour").prop("checked", true);
+                }
+                ids = response['game_id'];
+                hideUper();
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function updategame() {
+        var name = $("#GameName").val();
+        var member = $("#GameMember").val();
+        var cap = $("#GameCap").val();
+        var offer = $("#GameOffer").val();
+        var method = document.querySelector('input[name="chargeMethod"]:checked').value;
+
+        if (name == null || name == "" || name.length <= 1) {
+            $("#nameerror").text("Please fill in this detail");
+            return;
+        } else if (name.match(/[`!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+            $("#nameerror").text("Name does not contain any special characters");
+            return;
+        } else if (member == null || member == "") {
+            $("#membererror").text("Please fill in this detail");
+            return;
+        } else if (member <= 0 || member > 15) {
+            $("#membererror").text("Please provide a member value between 1 and 11");
+            return;
+        } else if (cap == null || cap == "") {
+            $("#captionerror").text("Please fill in this detail");
+            return;
+        }
+
+        $.ajax({
+            url: '/Game/UpdateGame',
+            method: 'POST',
+            data: { id:ids, name: name, member: member, cap: cap, method: method, offer:offer},
+            success: function (response) {
+                console.log(response);
+                fetch_Game();
+                hideDown();
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+</script>
+

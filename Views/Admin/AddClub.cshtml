@@ -1,0 +1,297 @@
+﻿@{
+    ViewData["Title"] = "AddClub";
+    Layout = "AdminLayout";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/css/NewCSS/ClubManager.css" />
+    <style>
+        #image {
+            width: 300;
+            height: 200;
+            padding: 7px;
+            margin: 2px;
+        }
+
+        .g-g-f {
+            border-radius: 10px;
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            max-height: 300px;
+            background: black;
+        }
+    </style>
+}
+
+<section class="section-manageGameMain">
+    <div class="container">
+        <div class="manageGameMain-Div">
+            <div class="row manageGameMain-head">
+                <div class="col-lg-6">
+                    <div class="manageGameMain-title">
+                        Add Club
+                    </div>
+                </div>
+            </div>
+            <div class="row manageGameMain-table-div">
+                <div class="col-lg-6 manageGameMain-div-leftC">
+                    <div class="g-g-f" style="">
+                        <img class="m-d-lc-img" src="~/Assets/Club/club1.jpg" alt="ProfileImage" id="image"></img>
+                    </div>
+                    <br>
+                    <button class="m-d-lc-img-btn" onclick="ProfileUpdate()">Change Image</button>
+                </div>
+                <div class="col-lg-6 manageGameMain-div-rightC">
+                    <div class="form-area">
+                        <div class="logInHeading">Details</div>
+                        <div class="f-d-error" id="error"></div>
+
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Club name</div>
+                                <div class="f-d-error" id="nameerror"></div>
+                            </div>
+                            <input class="form-area-input" type="text" id="name" />
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">State</div>
+                                <div class="f-d-error" id="stateerror"></div>
+                            </div>
+                            <select class="form-area-input" id="state" onchange="fcity()"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">City</div>
+                                <div class="f-d-error" id="cityerror"></div>
+                            </div>
+                            <select class="form-area-input" id="city" onchange="farea()"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Area</div>
+                                <div class="f-d-error" id="areaerror"></div>
+                            </div>
+                            <select class="form-area-input" id="area"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Apply Manager</div>
+                                <div class="f-d-error" id="managererror"></div>
+                            </div>
+                            <select class="form-area-input" id="manager"></select>
+                        </div>
+                        <div class="form-area-field">
+                            <div class="f-d-text-area" type="text">
+                                <div class="f-d-text">Address</div>
+                                <div class="f-d-error" id="addresserror"></div>
+                            </div>
+                            <input class="form-area-input" type="text" id="addr" />
+                        </div>
+                        <button class="f-d-submitBtn" onclick="AddClub()">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--
+
+<div class="loginBg">
+    <img src="~/Assets/Backgrounds/Background 4.jpg" alt="Background" class="loginBg-img" />
+</div>
+
+<h1>AddClub</h1>
+
+<div>
+
+    <img src="~/Assets/Club/club1.jpg" alt="ProfileImage" id="image" style="width: 200px; height: 200px;"></img>
+    <br>
+    <button onclick="ProfileUpdate()">Change Image</button>
+
+</div>
+
+
+<div>
+    <label>enter name : </label>
+    <label id="nameerror"></label>
+    <input type="text" id="name"/>
+    <br>
+
+    <label>selec state : </label>
+    <label id="stateerror"></label>
+    <select id="state" onchange="fcity()"></select>
+    <br>
+
+    <label>select city : </label>
+    <label id="cityerror"></label>
+    <select id="city" onchange="farea()"></select>
+    <br>
+
+    <label>select area : </label>
+    <label id="areaerror"></label>
+    <select id="area"></select>
+    <br>
+
+    <label>select manager : </label>
+    <label id="managererror"></label>
+    <select id="manager"></select>
+    <br>
+
+    <label>enter Address : </label>
+    <label id="addresserror"></label>
+    <input type="text" id="addr"/>
+    <br>
+
+    <button onclick="AddClub()">Add New Club</button>
+</div>
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        fState();
+        $("#state").val($("#state option:first").val());
+        fcity();
+        $("#city").val($("#city option:first").val());
+        farea();
+        $("#area").val($("#area option:first").val());
+        fmanager();
+        $("#manager").val($("#manager option:first").val());
+    });
+
+
+    function fState() {
+        $.ajax({
+            url: '/DropDown/State',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#state").html(response);
+            }
+        });
+    }
+
+    function fcity() {
+        var id = $("#state").val();
+        $.ajax({
+            url: '/DropDown/City',
+            type: 'POST',
+            async: false,
+            data: { state: id},
+            success: function (response) {
+                console.log(response);
+                $("#city").html(response);
+            }
+        });
+    }
+
+    function farea(){
+        var id = $("#city").val();
+        $.ajax({
+            url: '/DropDown/Area',
+            type: 'POST',
+            async: false,
+            data: { city: id},
+            success: function (response) {
+                console.log(response);
+                $("#area").html(response);
+            }
+        });
+    }
+
+    function fmanager(){
+        $.ajax({
+            url: '/DropDown/SelectManager',
+            type: 'POST',
+            async: false,
+            success: function (response) {
+                console.log(response);
+                $("#manager").html(response);
+            }
+        });
+    }
+
+    function ProfileUpdate() {
+        const fileInput = document.createElement('input');
+        var fileName;
+        fileInput.type = 'file';
+        fileInput.accept = '.jpg, .jpeg, .png, .webp';
+        fileInput.style.display = 'none';
+        fileInput.click();
+        fileInput.addEventListener('change', function () {
+            const selectedFile = fileInput.files[0];
+            if (selectedFile) {
+                fileName = selectedFile.name;
+                if (!isAllowedFileType(fileName)) {
+                    alert('Invalid file type. Please select a jpg, jpeg, png, or webp image.');
+                }
+                else { 
+                    $("#image").attr('src', `/Assets/Club/${fileName}`);
+                }
+            }
+        });
+    }
+
+    function isAllowedFileType(fileName) {
+        const allowedExtensions = [".jpg", ".jpeg", ".png", ".webp"];
+        const extension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+        return allowedExtensions.includes(extension);
+    }
+
+    function AddClub() {
+        var name = $("#name").val();
+        var addr = $("#addr").val();
+        var state = $("#state").val();
+        var city = $("#city").val();
+        var area = $("#area").val();
+        var manager = $("#manager").val();
+        var date = new Date().toISOString().slice(0, 10);
+        var image = $("#image").attr('src');
+        var fileName = image.substring(image.lastIndexOf('/') + 1);
+
+        console.log(name, addr, state, city,area, manager, date, fileName);
+
+        if (name == null || name == "" || name.length <= 1) {
+            $("#nameerror").text("Please fill this detail");
+            return ;
+        } else if (name.match(/[`!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/)) {
+            $("#nameerror").text("Name dose not contain any special characters");
+            return ;  
+        } else if (addr == null || addr == "") {
+            $("#addresserror").text("Please fill this address");
+            return ;
+        } else if (addr.length <= 5) {
+            $("#addresserror").text("Please give valid club address");
+            return ;
+        } else if ($("#state").val() == null) {
+            $("#stateerror").text("Please select an state");
+            return ;
+        } else if ($("#city").val() == null) {
+            $("#cityerror").text("Please select an city");
+            return ;
+        } else if ($("#area").val() == null) {
+            $("#areaerror").text("Please select an area");
+            return ;
+        } else if ($("#manager").val() == null) {
+            $("#managererror").text("Please select an manager");
+            return ;
+        }
+
+        $.ajax({
+            url: '/Club/AddClub',
+            method: 'POST',
+            data: {name: name, area: area, manager: manager, addr: addr, date: date , image: fileName},
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                console.error('Error fetching options: ' + status + ' - ' + error);
+            }
+        });
+    }
+
+</script>
+

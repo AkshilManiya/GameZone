@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @RenderSection("styles", required: false)
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/footer.css" />
+    <link rel="stylesheet" href="~/css/NewCSS/Admin.css">
+    <link rel="stylesheet" href="~/css/NewCSS/home.css">
+    <link rel="stylesheet" href="~/css/NewCSS/profile.css">
+
+    <link rel="stylesheet" href="~/css/ProCSS/homeCSS.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+   
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3 headerBg">
+            <div class="container">
+                <img class="logoImg" src="~/Assets/Game zone logo 2.png" />
+                <a class="brandText" asp-area="" asp-page="/Index">Game Zone</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link headerLinks" href="/Member/Home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link headerLinks" href="/Member/ClubView">Club</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link headerLinks" href="/Member/GameView">Games</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link headerLinks" href="/Member/AboutUsView">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link headerLinks" href="/Member/ContactUsView">Contact us</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav navbar-right" id="LoginView">
+                        <li class="nav-item">
+                            <a class="nav-link logInBtn" href="/app/loginView" >Log in</a>
+                        </li>
+                        <li class="nav-item divExtra">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link jointBtn" href="/MemberRegister/registerView">Sign Up</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav navbar-right" id="ProfileView">
+                        <li class="nav-item profileDiv">
+                            <button class="nav-link profileBtn" onclick="openProfileSlider()" id="openSliderButton">
+                                <div class="profile-left">
+                                    <img class="ProfileImg" id="sliderproimage" />
+                                </div>
+                                <div class="profile-right">
+                                    <i class="ri-arrow-down-s-line"></i>
+                                </div>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="slider-container" id="slider">
+        <div class="profileForm">
+            <img class="profile-image" id="proimage" alt="Profile Image">
+            <div class="user-name" id="proname"></div>
+            <div class="slider-buttons">
+                <hr class="profile-btn-sep">
+                <div class="boxS-1">
+                    <button class="btnS-one" onclick="window.location.href='/Member/Profile'">
+                        <span>
+                            <i class="ri-user-fill profile-slide-icons"></i>
+                            Manage Profile
+                        </span>
+                    </button>
+                </div>
+                <hr class="profile-btn-sep">
+                <div class="boxS-1">
+                    <button class="btnS-one" onclick="window.location.href='/Member/MyBooingsView'">
+                        <span>
+                            <i class="ri-dashboard-fill profile-slide-icons"></i>
+                            My Bookings
+                        </span>
+                    </button>
+                </div>
+                <hr class="profile-btn-sep">
+                <div class="boxS-1">
+                    <button class="btnS-one" onclick="window.location.href='/Member/MyWalletView'">
+                        <span>
+                            <i class="ri-wallet-fill profile-slide-icons"></i>
+                            Wallet
+                        </span>
+                    </button>
+                </div>
+
+                <hr class="profile-btn-sep">
+                <div class="boxS-1">
+                    <button class="btnS-one" onclick="window.location.href='/app/logout'">
+                        <span>
+                            <i class="ri-logout-box-r-fill profile-slide-icons"></i>
+                            Logout
+                        </span>
+                    </button>
+                </div>
+
+                <hr class="profile-btn-sep">
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <h1 style="color: #00c1cf">GAME ZONE</h1>
+                            </div>
+                            <div class="footer-text">
+                                <p>Game zone is a types of games.like cricketBox,snooker,etc.all game's are choose by teams and members.</p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span>Follow us</span>
+                                <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                                <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Useful Links</h3>
+                            </div>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">about</a></li>
+                                <li><a href="#">services</a></li>
+                                <li><a href="#">portfolio</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Our Services</a></li>
+                                <li><a href="#">Expert Team</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">Latest News</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Subscribe</h3>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2024, All Right Reserved <a href="#">Game Zone</a></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Club</a></li>
+                                <li><a href="#">Games</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+ 
+    <script>
+        const openSliderButton = document.getElementById('openSliderButton');
+        const slider = document.getElementById('slider');
+        let sliderOpen = false;
+        function openProfileSlider() {
+            sliderOpen = true;
+            slider.classList.add('slider-container-open');
+            document.body.style.overflow = 'hidden';
+            //contant.classList.add('blur')
+        }
+        document.addEventListener('click', function (event) {
+            if (sliderOpen && event.target !== openSliderButton && !slider.contains(event.target)) {
+                /*slider.style.right = '-27%';*/
+                sliderOpen = false;
+                document.body.style.overflow = 'visible'; // Restore
+                slider.classList.remove('slider-container-open');
+                //    contant.classList.remove('blur')
+            }
+        });
+    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+    </style>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/app/checkSession',
+                method: 'POST',
+                success: function (data) {
+                    console.log(data);
+                    if (data == "") {
+                        $("#LoginView").show();
+                        $("#ProfileView").hide();
+                    }
+                    else if (data == "tblAdmin") {
+                        window.location.href = '/Admin/Home';
+                    }
+                    else if (data == "tblManager") {
+                        window.location.href = "/Manager/Home";
+                    }
+                    else {
+                        $("#LoginView").hide();
+                        $("#ProfileView").show();
+                        $.ajax({
+                            url: '/Profile/fetchUser',
+                            method: 'POST',
+                            success: function (data) {
+                                console.log(data);
+                                document.getElementById('proimage').src = `http://localhost:5003/Assets/User/${data['image']}`;
+                                document.getElementById('sliderproimage').src = `http://localhost:5003/Assets/User/${data['image']}`;
+                                $('#proname').text(data['name']);
+                            },
+                            error: function (xhr, status, error) {
+                                console.error('Error:', error);
+                            }
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+        });
+    </script>
+
+    
+    
+</body>
+</html>
